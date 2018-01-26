@@ -21,11 +21,5 @@ public interface IDaoClient extends JpaRepository<Client, Long> {
 	 * @return List
 	 */
 	public List<Client> findByConseillerId(Long id);
-	
-//	@Query("select e from Employee e join e.roles r where e.login = (:login)")
-//	public List<ClientParticulier> findClientParticulierByConseillerId(Long idConseiller);
-//	
-//	public List<ClientEntreprise> findClientEntrepriseByConseillerId(Long idConseiller);
-	
-	
+		
 }

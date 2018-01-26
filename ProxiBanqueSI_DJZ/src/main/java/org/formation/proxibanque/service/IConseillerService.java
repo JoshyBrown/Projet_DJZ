@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.formation.proxibanque.dao.DaoException;
 import org.formation.proxibanque.entity.Client;
-import org.formation.proxibanque.entity.ClientEntreprise;
-import org.formation.proxibanque.entity.ClientParticulier;
 
 public interface IConseillerService {
 	
@@ -20,8 +18,4 @@ public interface IConseillerService {
 	public List<Client> listerTousClients() throws DaoException;
 
 	public List<Client> listerClientsDeConseiller(Long idConseiller) throws DaoException;
-
-	public List<ClientParticulier> listerClientsParticulierDeConseiller(Long idConseiller) throws DaoException;
-
-	public List<ClientEntreprise> listerClientsEntrepriseDeConseiller(Long idConseiller) throws DaoException;
 }

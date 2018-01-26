@@ -1,21 +1,18 @@
 package org.formation.proxibanque.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.formation.proxibanque.dao.DaoException;
 import org.formation.proxibanque.entity.Client;
-import org.formation.proxibanque.entity.ClientEntreprise;
-import org.formation.proxibanque.entity.ClientParticulier;
 import org.formation.proxibanque.service.IConseillerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Classe qui regroupe tous les traitements concernant un Conseiller courrant. -
@@ -30,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  *
  */
 
-@Service
+@RestController
 public class ConseillerRestController implements IConseillerRestController {
 
 	@Autowired
@@ -41,7 +38,7 @@ public class ConseillerRestController implements IConseillerRestController {
 	}
 
 	@Override
-	public ResponseEntity<Client> chercherClient(Long clientId) {
+	public ResponseEntity<Client> chercherClient(@PathVariable(value = "id") Long clientId) {
 		try {
 			Client foundClient = conseillerService.chercherClient(clientId);
 			if (null == foundClient)
@@ -50,7 +47,7 @@ public class ConseillerRestController implements IConseillerRestController {
 			return ResponseEntity.ok(foundClient);
 
 		} catch (DaoException e) {
-			return ResponseEntity.status(HttpStatus.METHOD_FAILURE).build();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 
@@ -69,7 +66,7 @@ public class ConseillerRestController implements IConseillerRestController {
 			return ResponseEntity.ok(client);
 			
 		} catch (DaoException e) {
-			return ResponseEntity.status(HttpStatus.METHOD_FAILURE).build();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 
@@ -87,7 +84,7 @@ public class ConseillerRestController implements IConseillerRestController {
 			
 			return ResponseEntity.ok(client);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.METHOD_FAILURE).build();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 
@@ -99,11 +96,13 @@ public class ConseillerRestController implements IConseillerRestController {
 	 * @throws DaoException
 	 *             DaoException
 	 */
-	public void supprimerClient(@Valid @RequestBody Client client) {
+	public ResponseEntity<Client> supprimerClient(@Valid @RequestBody Client client) {
 		try {
 			conseillerService.supprimerClient(client);
-		} catch (DaoException e) {
 			
+			return ResponseEntity.ok(client);
+		} catch (DaoException e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 
@@ -114,11 +113,13 @@ public class ConseillerRestController implements IConseillerRestController {
 	 * @throws DaoException
 	 *             DaoException
 	 */
-	public List<Client> listerTousClients() {
+	public ResponseEntity<List<Client>> listerTousClients() {
 		try {
-			return conseillerService.listerTousClients();
+			List<Client> clis = conseillerService.listerTousClients();
+			
+			return ResponseEntity.ok(clis);
 		} catch (DaoException e) {
-			return new ArrayList<>();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 
@@ -129,34 +130,13 @@ public class ConseillerRestController implements IConseillerRestController {
 	 * @throws DaoException
 	 *             DaoException
 	 */
-	public List<Client> listerClientsDeConseiller(@PathVariable(value = "id") Long idConseiller) {
+	public ResponseEntity<List<Client>> listerClientsDeConseiller(@PathVariable(value = "id") Long idConseiller) {
 		try {
-			return conseillerService.listerClientsDeConseiller(idConseiller);
+			List<Client> clis = conseillerService.listerClientsDeConseiller(idConseiller);
+			
+			return ResponseEntity.ok(clis);
 		} catch (DaoException e) {
-			return new ArrayList<>();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-
-	@Override
-	public List<ClientParticulier> listerClientsParticulierDeConseiller(@PathVariable(value = "id") Long idConseiller)
-			 {
-//		try {
-//			// return daoClient.selectAllClientParticulierByConseillerId(idConseiller);
-//			return new ArrayList<>();
-//		} catch (DaoException e) {
-			return new ArrayList<>();
-//		}
-	}
-
-	@Override
-	public List<ClientEntreprise> listerClientsEntrepriseDeConseiller(@PathVariable(value = "id") Long idConseiller)
-			 {
-//		try {
-//			// return daoClient.selectAllClientEntrepriseByConseillerId(idConseiller);
-//			return new ArrayList<>();
-//		} catch (DaoException e) {
-			return new ArrayList<>();
-//		}
-	}
-
 }

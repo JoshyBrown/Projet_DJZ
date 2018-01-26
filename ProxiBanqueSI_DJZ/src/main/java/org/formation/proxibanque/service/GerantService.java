@@ -6,9 +6,6 @@ import org.formation.proxibanque.dao.DaoException;
 import org.formation.proxibanque.dao.IDaoConseiller;
 import org.formation.proxibanque.entity.Agence;
 import org.formation.proxibanque.entity.Client;
-import org.formation.proxibanque.entity.ClientEntreprise;
-import org.formation.proxibanque.entity.ClientParticulier;
-import org.formation.proxibanque.entity.CompteCourant;
 import org.formation.proxibanque.entity.Conseiller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -89,22 +86,22 @@ public class GerantService implements IGerantService {
 
 		boolean hasDebiteurs = false;
 
-		for (Conseiller con : a.getGerant().getConseillerList()) {
-			for (Client clt : con.getClientsList()) {
-
-				if (clt instanceof ClientParticulier
-						&& clt.getCompteCourant().getSolde() < CompteCourant.MAXI_DECOUVERT_PARTICULIER) {
-					listDebiteurs.add(clt);
-					hasDebiteurs = true;
-				}
-				if (clt instanceof ClientEntreprise
-						&& clt.getCompteCourant().getSolde() < CompteCourant.MAXI_DECOUVERT_ENTREPRISE) {
-					listDebiteurs.add(clt);
-					hasDebiteurs = true;
-				}
-
-			}
-		}
+//		for (Conseiller con : a.getGerant().getConseillerList()) {
+//			for (Client clt : con.getClientsList()) {
+//
+//				if (clt instanceof ClientParticulier
+//						&& clt.getCompteCourant().getSolde() < CompteCourant.MAXI_DECOUVERT_PARTICULIER) {
+//					listDebiteurs.add(clt);
+//					hasDebiteurs = true;
+//				}
+//				if (clt instanceof ClientEntreprise
+//						&& clt.getCompteCourant().getSolde() < CompteCourant.MAXI_DECOUVERT_ENTREPRISE) {
+//					listDebiteurs.add(clt);
+//					hasDebiteurs = true;
+//				}
+//
+//			}
+//		}
 
 		return !hasDebiteurs;
 	}

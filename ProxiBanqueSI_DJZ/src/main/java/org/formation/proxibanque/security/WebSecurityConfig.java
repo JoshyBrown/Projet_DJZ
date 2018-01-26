@@ -27,9 +27,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
 	@Autowired
     UserDetailsService customUserDetailsService;
-	
-	@Autowired
-    CustomSuccessHandler customSuccessHandler;
 
   
     @Autowired
@@ -41,24 +38,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
-		http.httpBasic()  
-        .and()  
-        .logout()  
-        .and()
-		.authorizeRequests()
-//		.anyRequest().permitAll();
-		.anyRequest().authenticated()
-        .antMatchers("/", "/conseiller*").access("hasRole('ROLE_CONSEILLER')")
-        .antMatchers("/", "/gerant*").access("hasRole('ROLE_GERANT')")
+		http
+		.csrf().disable()
+//		.httpBasic()  
+//        .and()  
+//        .logout()  
 //        .and()
-//        .formLogin()
-//        	.loginPage("/login").loginProcessingUrl("/login")
-//        	.successHandler(customSuccessHandler)
-//        	.usernameParameter("login").passwordParameter("password")
-//        	.failureUrl("/login")
-        .and()
-        	.csrf().disable();
-//        .exceptionHandling().accessDeniedPage("/access_denied");
+		.authorizeRequests()
+		.anyRequest().permitAll()
+//		.anyRequest().authenticated()
+//        .antMatchers("/", "/conseiller*").access("hasRole('ROLE_CONSEILLER')")
+//        .antMatchers("/", "/gerant*").access("hasRole('ROLE_GERANT')")
+
+         ;
+
     }
 	
 	@Bean
