@@ -1,4 +1,4 @@
-import { Client } from '../model/client';
+import {Client} from '../model/client';
 import {ServiceListeClientsService} from '../service/service-liste-clients.service';
 import {Component, OnInit, Input} from '@angular/core';
 
@@ -10,8 +10,7 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class ListeClientsComponent implements OnInit {
 
-  @Input()
-  clients: Client[];
+  clients: Array<Client>;
 
   constructor(private serviceListeClients: ServiceListeClientsService) {
 //    this.clients = this.serviceListeClients.getAllClients();
@@ -19,6 +18,7 @@ export class ListeClientsComponent implements OnInit {
 
   ngOnInit() {
     console.log('liste-client component marche');
+    this.clients = this.serviceListeClients.getAllClients();
   }
 
 }
