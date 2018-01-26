@@ -14,7 +14,7 @@ export class ListeClientsComponent implements OnInit {
   clients: Client[];
 
   constructor(private serviceListeClients: ServiceListeClientsService) {
-    this.clients = this.serviceListeClients.getAllClients();
+//    this.clients = this.serviceListeClients.getAllClients();
   }
 
   ngOnInit() {

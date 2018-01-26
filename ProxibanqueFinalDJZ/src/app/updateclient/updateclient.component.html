@@ -1,0 +1,48 @@
+<p>updateclient works!</p>
+<form (ngSubmit)="onSubmit()" #updateForm='ngForm' novalidate>
+	<div>
+		<label>détails client</label>
+
+	<div>
+		<!-- 	type text tu input doit devenit httpElement -->
+		<input type='text' required [(ngModel)]='client1.id' name='id'
+			#id='ngModel' > 
+			<input type='text'
+			required [(ngModel)]='client1.nom' name='nom' #nom='ngModel' > 
+			<input type='text' required
+			[(ngModel)]='client1.prenom' name='prenom' #prenom='ngModel' >
+
+	</div>
+	</div>
+
+	<!-- CI-DESSOUS/ COPIE DU TP -->
+
+	<!-- 	<div> -->
+	<!-- 		<label for='title'>title</label> -->
+	<!-- 		<div class='col-sm-6'> -->
+	<!-- 			<input type='text' class='form-control' id='title' -->
+	<!-- 				placeholder='title' required [(ngModel)]='model.title' name='title' -->
+	<!-- 				#title='ngModel' required minlength='4'> -->
+	<!-- 			<div [hidden]='title.valid || title.pristine' -->
+	<!-- 				class='alert alert-danger'>title is required</div> -->
+	<!-- 			<div *ngIf='title?.error?.minlength'>At least 4 characters required</div> -->
+	<!-- 		</div> -->
+	<!-- 	</div> -->
+
+	<!-- 	<div> -->
+	<!-- 		<label for='link'>link</label> -->
+	<!-- 		<!-- 		<div class='col-sm-6'> -->
+	-->
+	<!-- 		<div> -->
+	<!-- 			<input type='text' id='link' placeholder='link' required -->
+	<!-- 				[(ngModel)]='model.link' name='link' #link='ngModel'> -->
+	<!-- 			<div [hidden]='link.valid || link.pristine' -->
+	<!-- 				class='alert alert-danger'>link is required</div> -->
+	<!-- 		</div> -->
+	<!-- 	</div> -->
+	<!-- 	<div> -->
+	<!-- 		<div> -->
+	<!-- 			<button type='submit' [disabled]="!login.form.valid">Submit</button> -->
+	<!-- 		</div> -->
+	<!-- 	</div> -->
+</form>

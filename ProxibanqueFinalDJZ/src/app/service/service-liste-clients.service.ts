@@ -6,7 +6,7 @@ export class ServiceListeClientsService {
 
   clients: Client[];
 
-  constructor(id, nom, prenom) {
+  constructor() {
     this.clients = [
       new Client('1', 'Abidal', 'Franck'),
       new Client('2', 'Mamie', 'Gigi'),
