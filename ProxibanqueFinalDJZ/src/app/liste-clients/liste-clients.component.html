@@ -2,4 +2,17 @@
   liste-clients works!
 </p>
 
-<app-liste-client-row *ngFor="let cli of clients" [client]="cli" ></app-liste-client-row>
+<table style="width:100%">
+	<tr id="monRow">
+		<th>Identifiant client</th>
+		<th>Nom du client</th> 
+		<th>Prénom du client</th>
+	</tr>
+	<tr>
+	    <td>Jill</td>
+	    <td>Smith</td> 
+	    <td>50</td>
+	</tr>
+		<app-liste-client-row *ngFor="let cli of clients" [client]="cli" >
+		</app-liste-client-row>
+</table>
