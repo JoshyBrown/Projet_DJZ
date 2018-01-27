@@ -12,7 +12,7 @@ export class ListeClientRowComponent implements OnInit {
   client: Client;
 
   constructor() {}
-
+  
   ngOnInit() {
     console.log('liste-client-row component marche');
   }

@@ -12,13 +12,17 @@ export class ListeClientsComponent implements OnInit {
 
   clients: Array<Client>;
 
-  constructor(private serviceListeClients: ServiceListeClientsService) {
-//    this.clients = this.serviceListeClients.getAllClients();
+  constructor(private serviceListeClients: ServiceListeClientsService) { }
+
+  getAllClients(){
+    this.serviceListeClients.getAllClients()
+    .subscribe(data => this.clients = data,
+    error => console.log('Mayday, mayday !'));
   }
 
   ngOnInit() {
     console.log('liste-client component marche');
-    this.clients = this.serviceListeClients.getAllClients();
+    this.getAllClients();
   }
 
 }

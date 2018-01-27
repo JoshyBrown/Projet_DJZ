@@ -12,11 +12,6 @@
 		<th>Nom du client</th> 
 		<th>Prénom du client</th>
 	</tr>
-	<tr>
-	    <td>Jill</td>
-	    <td>Smith</td> 
-	    <td>50</td>
-	</tr>
-		<app-liste-client-row *ngFor="let cli of clients" [client]="cli" >
-		</app-liste-client-row>
+	<app-liste-client-row *ngFor="let cli of clients" [client]="cli" >
+	</app-liste-client-row>
 </table>
