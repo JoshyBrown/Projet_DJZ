@@ -2,22 +2,4 @@
   liste-clients works!
 </p>
 
-<!--   	<div class="four wide column center aligned votes"> -->
-<!--   		<div class="ui statistic"> -->
-<!--   			<div class="label">Points</div> -->
-<!--   			<div class="value">{{clients.}}</div> -->
-<!--   		</div> -->
-<!--   	</div> -->
-
-<table style="width:100%">
-	<tr>
-		<th>Identifiant</th>
-		<th>Nom</th> 
-		<th>Prenom</th>
-	</tr>
-	<tr>
-		<td>Jill</td>
-		<td>Smith</td>
-		<td>50</td>
-		</tr>
-</table>
+<app-liste-client-row *ngFor="let cli of clients" [client]="cli" ></app-liste-client-row>
