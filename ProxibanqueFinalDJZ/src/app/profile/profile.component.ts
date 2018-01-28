@@ -9,7 +9,7 @@ import { Conseiller } from '../model/conseiller';
 })
 export class ProfileComponent implements OnInit {
 
-  model: Conseiller;
+  model: any;
 
   constructor() { }
 
