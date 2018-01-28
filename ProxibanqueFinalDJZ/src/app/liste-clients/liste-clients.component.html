@@ -1,17 +1,30 @@
-<head>
-	<meta charset="utf-8">
-</head>
+<div>
+	<a class="btn" [routerLink]="['/update-client']">Ajouter un client</a>
+</div>
 
-<p>
-  liste-clients works!
-</p>
-
-<table style="width:100%">
-	<tr id="monRow">
-		<th>Identifiant client</th>
-		<th>Nom du client</th> 
-		<th>Prénom du client</th>
-	</tr>
-	<app-liste-client-row *ngFor="let cli of clients" [client]="cli" >
-	</app-liste-client-row>
+<table>
+	<thead>
+		<tr id="monRow">
+			<th>Reférence du client</th>
+			<th>Nom du client</th>
+			<th>Prénom du client</th>
+			<th>Actions</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let client of clients">
+			<td>{{client.refClient}}</td>
+			<td>{{client.nom}}</td>
+			<td>{{client.prenom}}</td>
+			<td>
+				<a class="nav-link" [routerLink]="['/update-client', client.id]">Détails</a>
+			</td>
+			<td>
+				<a class="nav-link" (click)="deleteUser(client.id)">Delete</a>
+			</td>
+		</tr>
+		<!-- <app-liste-client-row *ngFor="let cli of clients" [client]="cli">
+			</app-liste-client-row><br> -->
+	</tbody>
 </table>

@@ -1,5 +1,10 @@
-import { Client } from '../model/client';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { Client } from '../model/client';
+import { ConseillerClientService } from '../service/conseiller-client.service';
+import { AlertService } from '../service/alert.service';
 
 @Component({
   selector: 'app-updateclient',
@@ -8,17 +13,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateclientComponent implements OnInit {
 
-  constructor() { }
+  actualClient: Client;
 
-  client1 = new Client('12', 'baba', 'diado');
+  constructor(
+    private conseillerCLientService: ConseillerClientService, 
+    private route: ActivatedRoute,
+    private alertService: AlertService ) { }
 
-   onSubmit() {
+  onSubmit() {
 
-  console.log('Client avec ID: ' + this.client1.id + 'Le nom du client est ' + this.client1.nom + '  et son prenom ' + this.client1.prenom);
+    console.log('Client avec ID: ' + this.actualClient.id +
+      'Le nom du client est ' + this.actualClient.nom +
+      '  et son prenom ' + this.actualClient.prenom);
   }
 
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => 
+      this.conseillerCLientService.getClient(params.get('id'))
+        .subscribe(data => this.actualClient = data, error => this.alertService.error(error))
+      );
   }
-
 }

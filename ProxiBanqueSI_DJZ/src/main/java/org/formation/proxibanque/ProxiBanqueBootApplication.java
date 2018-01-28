@@ -16,7 +16,7 @@ public class ProxiBanqueBootApplication {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/proxi_banque/*").allowedOrigins("http://localhost:4200");
+                registry.addMapping("/**").allowedOrigins("*");
             }
         };
     }

@@ -1,48 +1,56 @@
-<p>updateclient works!</p>
-<form (ngSubmit)="onSubmit()" #updateForm='ngForm' novalidate>
-	<div>
-		<label>détails client</label>
+<h3>Client information :</h3>
+<form class="well" (ngSubmit)="onSubmit()" #updateForm='ngForm' novalidate>
+	<table>
+		<tr>
+			<td>Reference :
+				<br>(Laissez vide si vous voulez generation auto)
+				<br>
+				<input type="text" required [(ngModel)]='actualClient.refClient' name='ref' #ref='ngModel' />
+			</td>
+		</tr>
+		<tr>
+			<td>Nom :
+				<br>
+				<input type="text" required [(ngModel)]='actualClient.nom' name='nom' #nom='ngModel' />
+			</td>
+		</tr>
+		<tr>
+			<td>Prenom :
+				<br>
+				<input type="text" required [(ngModel)]='actualClient.prenom' name='prenom' #prenom='ngModel' />
+			</td>
+		</tr>
+		<tr>
+			<td>Rue :
+				<br>
+				<input type="text" required [(ngModel)]='actualClient.adresse.rue' name='rue' #rue='ngModel' />
+			</td>
+		</tr>
+		<tr>
+			<td>Code Postal :
+				<br>
+				<input type="text" required [(ngModel)]='actualClient.adresse.codePostal' name='codePostal' #codePostal='ngModel' />
+			</td>
+		</tr>
+		<tr>
+			<td>Ville :
+				<br>
+				<input type="text" required [(ngModel)]='actualClient.adresse.ville' name='ville' #rue='ngModel' />
+			</td>
+		</tr>
+		<tr>
+			<td>Tel :
+				<br>
+				<input type="text" required [(ngModel)]='actualClient.adresse.tel' name='tel' #tel='ngModel' />
+			</td>
+		</tr>
 
-	<div>
-		<!-- 	type text tu input doit devenit httpElement -->
-		<input type='text' required [(ngModel)]='client1.id' name='id'
-			#id='ngModel' > 
-			<input type='text'
-			required [(ngModel)]='client1.nom' name='nom' #nom='ngModel' > 
-			<input type='text' required
-			[(ngModel)]='client1.prenom' name='prenom' #prenom='ngModel' >
+		<tr>
+			<td>
+				<input type="submit" value="Mettre a jour" class="btn btn-primary" />
+			</td>
+		</tr>
 
-	</div>
-	</div>
 
-	<!-- CI-DESSOUS/ COPIE DU TP -->
-
-	<!-- 	<div> -->
-	<!-- 		<label for='title'>title</label> -->
-	<!-- 		<div class='col-sm-6'> -->
-	<!-- 			<input type='text' class='form-control' id='title' -->
-	<!-- 				placeholder='title' required [(ngModel)]='model.title' name='title' -->
-	<!-- 				#title='ngModel' required minlength='4'> -->
-	<!-- 			<div [hidden]='title.valid || title.pristine' -->
-	<!-- 				class='alert alert-danger'>title is required</div> -->
-	<!-- 			<div *ngIf='title?.error?.minlength'>At least 4 characters required</div> -->
-	<!-- 		</div> -->
-	<!-- 	</div> -->
-
-	<!-- 	<div> -->
-	<!-- 		<label for='link'>link</label> -->
-	<!-- 		<!-- 		<div class='col-sm-6'> -->
-	-->
-	<!-- 		<div> -->
-	<!-- 			<input type='text' id='link' placeholder='link' required -->
-	<!-- 				[(ngModel)]='model.link' name='link' #link='ngModel'> -->
-	<!-- 			<div [hidden]='link.valid || link.pristine' -->
-	<!-- 				class='alert alert-danger'>link is required</div> -->
-	<!-- 		</div> -->
-	<!-- 	</div> -->
-	<!-- 	<div> -->
-	<!-- 		<div> -->
-	<!-- 			<button type='submit' [disabled]="!login.form.valid">Submit</button> -->
-	<!-- 		</div> -->
-	<!-- 	</div> -->
+	</table>
 </form>

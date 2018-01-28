@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/proxi_banque/conseiller")
+@RequestMapping("/proxi_banque")
 //@PreAuthorize("hasRole('ROLE_CONSEILLER')")
 public interface IConseillerRestController {
 	

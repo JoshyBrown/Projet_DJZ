@@ -1,17 +1,18 @@
 import { Adresse } from './adresse';
 
-export class Client {
+export class Conseiller {
+  /* private @class: string = 'org.formation.proxibanque.entity.Conseiller'; */
   id: string;
-  refClient: string;
+  refEmployee: string;
   nom: string;
   prenom: string;
   login: string;
   password: string;
   adresse: Adresse;
 
-constructor(id: string, refClient: string, nom: string, prenom: string, adresse?: Adresse, login?: string, password?: string) {
+constructor(id: string, refEmployee: string, nom: string, prenom: string, adresse?: Adresse, login?: string, password?: string) {
     this.id = id;
-    this.refClient = refClient;
+    this.refEmployee = refEmployee;
     this.nom = nom;
     this.prenom = prenom;
     this.adresse = adresse || null;

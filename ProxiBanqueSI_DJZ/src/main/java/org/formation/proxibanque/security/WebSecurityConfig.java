@@ -13,9 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * Classe de configuration Spring Security 
- *  - filtrage des acces selon ROLE
- *  - configurer AuthenticationManagerBuilder pour verifier password utilisateur logge
+ * Classe de configuration Spring Security - filtrage des acces selon ROLE -
+ * configurer AuthenticationManagerBuilder pour verifier password utilisateur
+ * logge
  * 
  * @author JW
  *
@@ -24,38 +24,29 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @ComponentScan(basePackageClasses = CustomUserDetailsService.class)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    
-	@Autowired
-    UserDetailsService customUserDetailsService;
 
-  
-    @Autowired
+	@Autowired
+	UserDetailsService customUserDetailsService;
+
+	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
 	}
 
-
-	
 	@Override
-    protected void configure(HttpSecurity http) throws Exception {
+	protected void configure(HttpSecurity http) throws Exception {
 		http
-		.csrf().disable()
-//		.httpBasic()  
-//        .and()  
-//        .logout()  
-//        .and()
-		.authorizeRequests()
-		.anyRequest().permitAll()
-//		.anyRequest().authenticated()
-//        .antMatchers("/", "/conseiller*").access("hasRole('ROLE_CONSEILLER')")
-//        .antMatchers("/", "/gerant*").access("hasRole('ROLE_GERANT')")
+			.authorizeRequests()
+			.anyRequest().permitAll()
+//			.anyRequest().fullyAuthenticated()
+//			.and()
+//			.httpBasic()
+			.and()
+			.csrf().disable();
+	}
 
-         ;
-
-    }
-	
 	@Bean
-	public PasswordEncoder passwordEncoder(){
+	public PasswordEncoder passwordEncoder() {
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
 		return encoder;
 	}

@@ -5,12 +5,15 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.formation.proxibanque.dao.DaoException;
+import org.formation.proxibanque.dao.IDaoEmployee;
 import org.formation.proxibanque.entity.Client;
+import org.formation.proxibanque.entity.Employee;
 import org.formation.proxibanque.service.IConseillerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,7 +39,21 @@ public class ConseillerRestController implements IConseillerRestController {
 	public ConseillerRestController() {
 		super();
 	}
-
+	
+	
+	@Autowired
+    private IDaoEmployee daoEmployee;
+	
+	@PostMapping("/auth")
+	public ResponseEntity<Employee> kogin(@Valid @RequestBody Employee user) {
+		user = daoEmployee.findEmployeeByLogin(user.getLogin());
+		if ( null != user ) {
+			user.setToken("Test token");
+			return ResponseEntity.ok(user);
+		} else
+			return ResponseEntity.notFound().build();
+	}
+	
 	@Override
 	public ResponseEntity<Client> chercherClient(@PathVariable(value = "id") Long clientId) {
 		try {

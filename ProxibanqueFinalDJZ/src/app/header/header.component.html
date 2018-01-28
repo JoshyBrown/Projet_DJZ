@@ -1,0 +1,23 @@
+<div class="page-header">
+  <nav class="navbar navbar-fixed-top navbar-dark bg-primary">
+    <a class="navbar-brand" [routerLink]="['/home']">Proxi Banque SI</a>
+
+    <ul class="nav navbar-nav pull-right">
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/gestion-client']">Gestion de Client</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/home']">Gestion de Compte</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/virement']">Virement</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/profile']">{{currentUser}}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/login']">Logout</a>
+      </li>
+    </ul>
+  </nav>
+</div>

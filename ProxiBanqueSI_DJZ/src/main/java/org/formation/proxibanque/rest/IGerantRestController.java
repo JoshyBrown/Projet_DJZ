@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/proxi_banque/gerant")
+@RequestMapping("/proxi_banque")
 //@PreAuthorize("hasRole('ROLE_GERANT')")
 public interface IGerantRestController {
 	

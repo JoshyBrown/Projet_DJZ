@@ -1,0 +1,76 @@
+<h3>Effectuer un virement :</h3>
+
+<form class="well" (ngSubmit)="onSubmit()" #virementForm='ngForm' novalidate>
+  <table>
+
+    <tr>
+      <td>
+        <label for="debiteurselect">Selectionnez un debiteur : </label>
+        <select class="form-control" name="debiteurselect" id="debiteurselect">
+          <option *ngFor="let client of clients" value='client.id'>{{client.nom}} {{client.prenom}} ({{client.refClient}})</option>
+        </select>
+      </td>
+      <td>
+        <label for="debcomptselect">Selectionnez son compte a debiter : </label>
+        <select class="form-control" name="debcomptselect" id="debcomptselect">
+          <option value="courant">Compte Courant</option>
+          <option value="epargne">Compte Epargne</option>
+        </select>
+      </td>
+    </tr>
+
+
+
+    <tr>
+      <td>
+        <label for="crediteurselect">Selectionnez un crediteur : </label>
+        <select class="form-control" name="crediteurselect" id="crediteurselect">
+          <option *ngFor="let client of allClients" value="client.id">{{client.nom}} {{client.prenom}} ({{client.refClient}})</option>
+        </select>
+      </td>
+      <td>
+        <label for="crdcomptselect">Selectionnez son compte a debiter : </label>
+        <select class="form-control" name="crdcomptselect" id="crdcomptselect">
+          <option value="courant">Compte Courant</option>
+          <option value="epargne">Compte Epargne</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="text" name="montant" placeholder="Saisissez le montant" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="reset" value="Annuller" class="btn" />
+        <input type="submit" value="Effectuer" class="btn btn-primary" />
+      </td>
+    </tr>
+  </table>
+</form>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Debiteur</th>
+      <th>Nouveau Solde</th>
+      <th>Crediteur</th>
+      <th>Nouveau Solde</th>
+      <th>Montant vire</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{debiteur.nom}} {{debiteur.prenom}}</td>
+
+      <td>depart.solde</td>
+
+      <td>{{crediteur.nom}} {{crediteur.prenom}}</td>
+
+      <td>cible.solde</td>
+
+      <td>montant</td>
+    </tr>
+  </tbody>
+</table>

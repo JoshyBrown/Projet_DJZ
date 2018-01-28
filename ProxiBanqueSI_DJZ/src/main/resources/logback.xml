@@ -18,7 +18,7 @@
 		</encoder>
 	</appender>
 	
-	<logger name="org.springframework" level="INFO" />
+	<logger name="org.springframework" level="debug" />
 	<logger name="org.hibernate.type" level="ERROR" />
 	<logger name="org.hibernate" level="ERROR" />
 
