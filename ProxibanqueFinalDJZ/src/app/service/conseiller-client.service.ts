@@ -3,11 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { Client } from '../model/client';
+import * as CONST from '../constants';
 
 @Injectable()
 export class ConseillerClientService {
 
-  private client_url: string = 'http://localhost:8080/proxi_banque/clients';
+  private client_url: string = CONST.REST_HOST + '/clients';
 
   constructor(private http: HttpClient) { }
 

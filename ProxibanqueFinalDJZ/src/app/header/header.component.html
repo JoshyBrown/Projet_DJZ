@@ -3,7 +3,7 @@
     <a class="navbar-brand" [routerLink]="['/home']">Proxi Banque SI</a>
 
     <ul class="nav navbar-nav pull-right">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" [routerLink]="['/gestion-client']">Gestion de Client</a>
       </li>
       <li class="nav-item">
@@ -13,7 +13,7 @@
         <a class="nav-link" [routerLink]="['/virement']">Virement</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/profile']">{{currentUser}}</a>
+        <a class="nav-link" [routerLink]="['/profile']">[(currentUser.nom)] [(currentUser.prenom)]</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/login']">Logout</a>

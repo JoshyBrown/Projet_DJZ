@@ -18,6 +18,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
@@ -28,11 +29,11 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  *
  */
 
-
+@JsonIgnoreProperties(value = {"password"}, allowSetters = true)
+@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="@class")
 @Entity
 @Table(name = "employee")
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="@class")
 public abstract class Employee {
 
 	@Id

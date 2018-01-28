@@ -19,7 +19,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { AlertService } from './service/alert.service';
 import { AuthenticationService } from './service/authentication.service';
 import { AuthGuard } from './service/auth.guard';
-import { LoginGuard } from './service/login.guard';
 import { JwtInterceptor } from './service/jwt.interceptor';
 import { ConseillerClientService } from './service/conseiller-client.service';
 import { HomeComponent } from './home/home.component';
@@ -46,7 +45,6 @@ import { HeaderComponent } from './header/header.component';
   ],
   providers: [
     AuthGuard,
-    LoginGuard,
     AlertService,
     AuthenticationService,
     ConseillerClientService,

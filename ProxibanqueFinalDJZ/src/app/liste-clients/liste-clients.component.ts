@@ -24,7 +24,9 @@ export class ListeClientsComponent implements OnInit {
   }
 
   getAllClients() {
-    this.conseillerCLientService.getClients()
+    const id = 2;
+    
+    this.conseillerCLientService.getClientsByConseiller(id)
       .subscribe(data => this.clients = data, error => this.alertService.error(error));
 
     return false;

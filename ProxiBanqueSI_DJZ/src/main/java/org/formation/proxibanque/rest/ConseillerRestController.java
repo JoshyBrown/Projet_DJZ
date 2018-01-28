@@ -8,7 +8,10 @@ import org.formation.proxibanque.dao.DaoException;
 import org.formation.proxibanque.dao.IDaoEmployee;
 import org.formation.proxibanque.entity.Client;
 import org.formation.proxibanque.entity.Employee;
+import org.formation.proxibanque.service.ConseillerService;
 import org.formation.proxibanque.service.IConseillerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +35,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ConseillerRestController implements IConseillerRestController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ConseillerRestController.class);
 
 	@Autowired
 	private IConseillerService conseillerService;
@@ -46,9 +51,15 @@ public class ConseillerRestController implements IConseillerRestController {
 	
 	@PostMapping("/auth")
 	public ResponseEntity<Employee> kogin(@Valid @RequestBody Employee user) {
+		
+		LOGGER.info("Utilisateur : " + user.getLogin() + " essaye de logger");
+		
 		user = daoEmployee.findEmployeeByLogin(user.getLogin());
 		if ( null != user ) {
 			user.setToken("Test token");
+			
+			LOGGER.info("Logger reussi : " + user.getNom() + " " + user.getPrenom());
+			
 			return ResponseEntity.ok(user);
 		} else
 			return ResponseEntity.notFound().build();

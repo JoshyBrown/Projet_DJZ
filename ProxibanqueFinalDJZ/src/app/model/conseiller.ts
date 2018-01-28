@@ -10,8 +10,7 @@ export class Conseiller {
   password: string;
   adresse: Adresse;
 
-constructor(id: string, refEmployee: string, nom: string, prenom: string, adresse?: Adresse, login?: string, password?: string) {
-    this.id = id;
+constructor(refEmployee?: string, nom?: string, prenom?: string, adresse?: Adresse, login?: string, password?: string) {
     this.refEmployee = refEmployee;
     this.nom = nom;
     this.prenom = prenom;
