@@ -1,6 +1,6 @@
 export class CompteEpargne {
     id: string;
-    numcompte: string;
+    numCompte: string;
     solde: number;
     etatActif: boolean;
     dateOuverture: string;

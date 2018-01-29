@@ -7,7 +7,7 @@ export class Client {
   refClient: string;
   nom: string;
   prenom: string;
-  compteCourant: CompteCourant
+  compteCourant: CompteCourant;
   compteEpargne: CompteEpargne;
   adresse: Adresse;
   login: string;
