@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListeClientRowComponent } from './liste-client-row.component';
+import { DeleteClientComponent } from './delete-client.component';
 
-describe('ListeClientRowComponent', () => {
-  let component: ListeClientRowComponent;
-  let fixture: ComponentFixture<ListeClientRowComponent>;
+describe('DeleteClientComponent', () => {
+  let component: DeleteClientComponent;
+  let fixture: ComponentFixture<DeleteClientComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListeClientRowComponent ]
+      declarations: [ DeleteClientComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListeClientRowComponent);
+    fixture = TestBed.createComponent(DeleteClientComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

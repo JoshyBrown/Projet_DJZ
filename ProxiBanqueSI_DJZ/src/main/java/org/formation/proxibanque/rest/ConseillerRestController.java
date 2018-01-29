@@ -139,13 +139,20 @@ public class ConseillerRestController implements IConseillerRestController {
 	 * @throws DaoException
 	 *             DaoException
 	 */
-	public ResponseEntity<Client> supprimerClient(@Valid @RequestBody Client client) {
+	public ResponseEntity<Client> supprimerClient(@PathVariable(value = "id") Long clientId) {
 		try {
-			conseillerService.supprimerClient(client);
 			
-			LOGGER.info("Client supprime : Id=" + client.getId() + " " + client.getNom() + " " + client.getPrenom());
+			Client foundClient = conseillerService.chercherClient(clientId);
+			if (null == foundClient) {
+				LOGGER.error("Client avec id : " + clientId + " non trouve");
+				return ResponseEntity.notFound().build();
+			}
 			
-			return ResponseEntity.ok(client);
+			conseillerService.supprimerClient(foundClient);
+			
+			LOGGER.info("Client supprime : Id=" + foundClient.getId() + " " + foundClient.getNom() + " " + foundClient.getPrenom());
+			
+			return ResponseEntity.ok(foundClient);
 		} catch (DaoException e) {
 			LOGGER.error("Exception : " + e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
