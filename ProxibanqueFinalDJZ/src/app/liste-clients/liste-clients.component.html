@@ -8,6 +8,8 @@
 			<th>Reférence du client</th>
 			<th>Nom du client</th>
 			<th>Prénom du client</th>
+			<th>Solde du compte courant</th>
+			<th>Solde du compte épargne</th>
 			<th colspan="2">Actions</th>
 		</tr>
 	</thead>
@@ -16,6 +18,8 @@
 			<td>{{client.refClient}}</td>
 			<td>{{client.nom}}</td>
 			<td>{{client.prenom}}</td>
+			<td>{{client.compteCourant.solde}}</td>
+			<td>{{client.compteEpargne.solde}}</td>
 			<td>
 				<a class="nav-link" [routerLink]="['/update-client', client.id]">Détails</a>
 			</td>
@@ -23,7 +27,5 @@
 				<a class="button" (click)="deleteUser(client)">Supprimer</a>
 			</td>
 		</tr>
-		<!-- <app-liste-client-row *ngFor="let cli of clients" [client]="cli">
-			</app-liste-client-row><br> -->
 	</tbody>
 </table>
