@@ -22,9 +22,8 @@ export class UpdateclientComponent implements OnInit {
 
   onSubmit() {
 
-    console.log('Client avec ID: ' + this.actualClient.id +
-      'Le nom du client est ' + this.actualClient.nom +
-      '  et son prenom ' + this.actualClient.prenom);
+    this.conseillerCLientService.updateClient(this.actualClient)
+      .subscribe(data => this.actualClient = data, error => this.alertService.error(error));
   }
 
 
