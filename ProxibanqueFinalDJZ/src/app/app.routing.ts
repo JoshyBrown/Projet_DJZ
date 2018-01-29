@@ -22,16 +22,6 @@ const appRoutes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: '**', redirectTo: '' }
 
-  /* { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'virement', component: VirementComponent },
-  { path: 'update-client/:id', component: UpdateclientComponent },
-  { path: 'update-client', component: UpdateclientComponent },
-  { path: 'gestion-client', component: ListeClientsComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', redirectTo: '' } */
-
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
