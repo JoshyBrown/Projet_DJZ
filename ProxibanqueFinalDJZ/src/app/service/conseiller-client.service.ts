@@ -23,15 +23,13 @@ export class ConseillerClientService {
   addClient(client): Observable<Client>  {
     return this.http.post<Client>(this.client_url, client);
   }
-/* SERVICE PAR JILIANG
-*/    
 
   updateClient(client): Observable<Client> {
     return this.http.put<Client>(this.client_url, client);
   }
 
   deleteClient(id): Observable<any> {
-    return this.http.delete<Client>(this.client_url + '/' + id);
+    return this.http.delete(this.client_url + '/' + id);
   }
 
   getClientsByConseiller(id): Observable<Client[]> {
