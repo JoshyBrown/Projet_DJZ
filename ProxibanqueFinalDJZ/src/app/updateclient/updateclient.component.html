@@ -1,9 +1,10 @@
-<h3>Client information :</h3>
+<h3>Informations client :</h3>
+
 <form class="well" (ngSubmit)="onSubmit()" #updateForm='ngForm' novalidate>
 	<table>
 		<tr>
-			<td>Reference :
-				<br>(Ne pas remplir si vous souhaitez une generation automatique)
+			<td>Référence :
+				<br>(Ne rien saisir si vous souhaitez une génération automatique)
 				<br>
 				<input type="text" required [(ngModel)]='actualClient.refClient' name='ref' #ref='ngModel' />
 			</td>
@@ -15,7 +16,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td>Prenom :
+			<td>Prénom :
 				<br>
 				<input type="text" required [(ngModel)]='actualClient.prenom' name='prenom' #prenom='ngModel' />
 			</td>
@@ -54,3 +55,88 @@
 
 	</table>
 </form>
+
+<div class="container-fluid comptesClient">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-10 col-md-5 col-md-offset-2 col-lg-8">
+				<h2>Détails du compte courant :</h2>
+				<table class="table table-striped table-bordered table-hover">
+					<thead class="thead-light">
+					</thead>
+					<tbody>
+						<tr>
+							<th>Numéro de compte</th>
+							<td>{{actualClient.compteCourant.numCompte}}
+								<input placeholder="" />
+							</td>
+						</tr>
+						<tr>
+							<th>Solde du compte</th>
+							<td>{{actualClient.compteCourant.solde}}
+								<input placeholder=""/> €
+							</td>
+						</tr>
+						<tr>
+							<th>État du compte</th>
+							<td>{{actualClient.compteCourant.etatActif}}
+								<input placeholder=""/>
+							</td>
+						</tr>
+						<tr>
+							<th>Date d'ouverture</th>
+							<td>{{actualClient.compteCourant.dateOuverture}}
+								<input placeholder=""/>
+							</td>
+						</tr>
+						<tr>
+							<th>Découvert autorisé</th>
+							<td>{{actualClient.compteCourant.decouvertAuthorise}}
+								<input placeholder=""/>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<input type="submit" value="Activer le compte" class="btn btn-primary" />
+				<h2>Détails du compte épargne :</h2>
+				<table class="table table-striped table-bordered table-hover">
+					<thead class="thead-light">
+					</thead>
+					<tbody>
+						<tr>
+							<th>Numéro de compte</th>
+							<td>{{actualClient.compteEpargne.numCompte}}
+								<input placeholder=""/>
+							</td>
+						</tr>
+						<tr>
+							<th>Solde du compte</th>
+							<td>{{actualClient.compteEpargne.solde}}
+								<input placeholder=""/> €
+							</td>
+						</tr>
+						<tr>
+							<th>État du compte</th>
+							<td>{{actualClient.compteEpargne.etatActif}}
+								<input placeholder=""/>
+							</td>
+						</tr>
+						<tr>
+							<th>Date d'ouverture</th>
+							<td>{{actualClient.compteEpargne.dateOuverture}}
+								<input placeholder=""/>
+							</td>
+						</tr>
+						<tr>
+							<th>Taux de rémunération</th>
+							<td>{{actualClient.compteEpargne.tauxInteret}}
+								<input placeholder=""/>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<input type="submit" value="Activer le compte" class="btn btn-primary" />
+			</div>
+		</div>
+	</div>
+</div>
