@@ -1,32 +1,86 @@
+
 <p>updateclient works!</p>
 
-
-<form (ngSubmit)="onSubmit()" #updateForm='ngForm' novalidate>
+<!-- CODE PAR ZLATKA CI-DESSOUS -->
+<!-- <form (ngSubmit)="onSubmit()" #updateForm='ngForm' novalidate>
 	<h2> Details client </h2>
 	<div>
 		<label> id client</label>
-
+-->
 	
 <!-- 			type text tu input doit devenit httpElement -->
-<input type='text' required [(ngModel)]='client1.id' name='id'
+<!--<input type='text' required [(ngModel)]='client1.id' name='id'
 #id='ngModel' /> 		
 </div>
 <div>
 <label> nom client</label>
-
+-->
 
 <!-- 			type text tu input doit devenit httpElement -->
  
-	<input type='text' required [(ngModel)]='client1.nom' name='nom'
+<!--	<input type='text' required [(ngModel)]='client1.nom' name='nom'
 	#nom='ngModel' />
 </div>
 <div>
 <label> prenom client</label>
-
+-->
 
 <!-- 			type text tu input doit devenit httpElement -->
-<input type='text' required [(ngModel)]='client1.prenom' name='prenom'
+<!--<input type='text' required [(ngModel)]='client1.prenom' name='prenom'
 #prenom='ngModel' /> 		
 </div>
 <button type='submit' > update </button>
-</form>  
+</form>   -->
+
+<h3>Client information :</h3>
+<form class="well" (ngSubmit)="onSubmit()" #updateForm='ngForm' novalidate>
+	<table>
+		<tr>
+			<td>Reference :
+				<br>(Laissez vide si vous voulez generation auto)
+				<br>
+				<input type="text" required [(ngModel)]='actualClient.refClient' name='ref' #ref='ngModel' />
+			</td>
+		</tr>
+		<tr>
+			<td>Nom :
+				<br>
+				<input type="text" required [(ngModel)]='actualClient.nom' name='nom' #nom='ngModel' />
+			</td>
+		</tr>
+		<tr>
+			<td>Prenom :
+				<br>
+				<input type="text" required [(ngModel)]='actualClient.prenom' name='prenom' #prenom='ngModel' />
+			</td>
+		</tr>
+		
+		<tr>
+			<td>Rue :
+				<br>
+				<input type="text" required [(ngModel)]='actualClient.adresse.rue' name='rue' #rue='ngModel' />
+			</td>
+		</tr>
+		<tr>
+			<td>Code Postal :
+				<br>
+				<input type="text" required [(ngModel)]='actualClient.adresse.codePostal' name='codePostal' #codePostal='ngModel' />
+			</td>
+		</tr>
+		<tr>
+			<td>Ville :
+				<br>
+				<input type="text" required [(ngModel)]='actualClient.adresse.ville' name='ville' #rue='ngModel' />
+			</td>
+		</tr>
+		<tr>
+			<td>Tel :
+				<br>
+				<input type="text" required [(ngModel)]='actualClient.adresse.tel' name='tel' #tel='ngModel' />
+			</td>
+		</tr>
+		
+
+	</table>
+</form>
+

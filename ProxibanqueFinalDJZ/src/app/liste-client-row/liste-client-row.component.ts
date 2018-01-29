@@ -12,6 +12,10 @@ export class ListeClientRowComponent implements OnInit {
   client: Client;
 
   constructor() {}
+  
+  deleteUser(id) {
+    
+  }
 
   ngOnInit() {
     console.log('liste-client-row component marche');

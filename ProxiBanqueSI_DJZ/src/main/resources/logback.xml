@@ -18,11 +18,11 @@
 		</encoder>
 	</appender>
 	
-	<logger name="org.springframework" level="INFO" />
+	<logger name="org.springframework" level="info" />
 	<logger name="org.hibernate.type" level="ERROR" />
 	<logger name="org.hibernate" level="ERROR" />
 
-	<root level="info">
+	<root level="debug">
 		<!-- uncomment file -->
 <!-- 		<appender-ref ref="file"/> -->
 		<appender-ref ref="console" />

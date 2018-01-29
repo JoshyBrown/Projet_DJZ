@@ -1,13 +1,10 @@
 package org.formation.proxibanque.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.formation.proxibanque.dao.DaoException;
 import org.formation.proxibanque.dao.IDaoClient;
 import org.formation.proxibanque.entity.Client;
-import org.formation.proxibanque.entity.ClientEntreprise;
-import org.formation.proxibanque.entity.ClientParticulier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,25 +133,4 @@ public class ConseillerService implements IConseillerService {
 			throw new DaoException("ConseillerService.listerClientsDeConseiller" + e);
 		}
 	}
-
-	@Override
-	public List<ClientParticulier> listerClientsParticulierDeConseiller(Long idConseiller) throws DaoException {
-		try {
-			// return daoClient.selectAllClientParticulierByConseillerId(idConseiller);
-			return new ArrayList<>();
-		} catch (Exception e) {
-			throw new DaoException("ConseillerService.listerClientsParticulierDeConseiller" + e);
-		}
-	}
-
-	@Override
-	public List<ClientEntreprise> listerClientsEntrepriseDeConseiller(Long idConseiller) throws DaoException {
-		try {
-			// return daoClient.selectAllClientEntrepriseByConseillerId(idConseiller);
-			return new ArrayList<>();
-		} catch (Exception e) {
-			throw new DaoException("ConseillerService.listerClientsEntrepriseDeConseiller" + e);
-		}
-	}
-
 }

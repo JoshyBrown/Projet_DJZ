@@ -1,9 +1,7 @@
 package org.formation.proxibanque.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 
 /**
  * Entity CompteCourant herite de Compte (strategy SINGLE TABLE)
@@ -24,24 +22,24 @@ public class CompteCourant extends Compte {
 	
 	private double decouvertAuthorise;
 	
-	@OneToOne(mappedBy = "compteCourant", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
-	private Carte carte;
+//	@OneToOne(mappedBy = "compteCourant", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
+//	private Carte carte;
 	
 	public CompteCourant() {
 		super();
 		this.decouvertAuthorise = DEFAULT_DECOUVERT;
 		// Attribuer une carte par defaut
-		this.setCarte(new VisaElectron());
+//		this.setCarte(new VisaElectron());
 	}
 	
-	public Carte getCarte() {
-		return carte;
-	}
-
-	public void setCarte(Carte carte) {
-		carte.setCompteCourant(this);
-		this.carte = carte;
-	}
+//	public Carte getCarte() {
+//		return carte;
+//	}
+//
+//	public void setCarte(Carte carte) {
+//		carte.setCompteCourant(this);
+//		this.carte = carte;
+//	}
 
 	
 	public double getDecouvertAuthorise() {

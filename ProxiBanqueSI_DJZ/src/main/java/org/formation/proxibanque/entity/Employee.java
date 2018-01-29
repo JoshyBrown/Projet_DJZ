@@ -16,6 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
  * 
@@ -25,7 +29,8 @@ import javax.persistence.Table;
  *
  */
 
-
+@JsonIgnoreProperties(value = {"password"}, allowSetters = true)
+@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="@class")
 @Entity
 @Table(name = "employee")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -53,7 +58,10 @@ public abstract class Employee {
 	private String login;
 
 	private String password;
-
+	
+	@Transient
+	private String token;
+	
 	public Employee() {
 		super();
 		this.adresse = new Adresse();
@@ -136,5 +144,13 @@ public abstract class Employee {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 }

@@ -22,10 +22,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 
 
-@JsonIgnoreProperties(value = {"gerant"})
+@JsonIgnoreProperties(value = {"gerant", "clientsList"})
 @Entity
-@NamedQueries({ @NamedQuery(name = "findAllConseiller", query = "select m from Conseiller m"),
-	@NamedQuery(name = "findConseillersByGerandId", query = "select m from Conseiller m join m.gerant c where c.id = :gerid") })
 @Table(name = "conseiller")
 public class Conseiller extends Employee {
 

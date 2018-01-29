@@ -1,24 +1,42 @@
-import {Client} from '../model/client';
-import {ServiceListeClientsService} from '../service/service-liste-clients.service';
-import {Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { Client } from '../model/client';
+import { ConseillerClientService } from '../service/conseiller-client.service';
+import { AlertService } from '../service/alert.service';
 
 @Component({
   selector: 'app-liste-clients',
   templateUrl: './liste-clients.component.html',
-  styleUrls: ['./liste-clients.component.css'],
-  providers: [ServiceListeClientsService]
+  styleUrls: ['./liste-clients.component.css']
 })
 export class ListeClientsComponent implements OnInit {
 
   clients: Array<Client>;
 
-  constructor(private serviceListeClients: ServiceListeClientsService) {
-//    this.clients = this.serviceListeClients.getAllClients();
+  constructor(private conseillerCLientService: ConseillerClientService, private alertService: AlertService) { }
+
+  deleteUser(client) {
+    console.log('Client a supprimer : ' + JSON.stringify(client));
+
+    this.conseillerCLientService.deleteClient(client)
+      .subscribe(() => { this.getAllClients() }), error => this.alertService.error(error);
+
+      return false;
+  }
+
+  getAllClients() {
+    const id = 2;
+    
+    this.conseillerCLientService.getClientsByConseiller(id)
+      .subscribe(data => this.clients = data, error => this.alertService.error(error));
+
+    return false;
   }
 
   ngOnInit() {
     console.log('liste-client component marche');
-    this.clients = this.serviceListeClients.getAllClients();
+    this.getAllClients();
   }
 
 }

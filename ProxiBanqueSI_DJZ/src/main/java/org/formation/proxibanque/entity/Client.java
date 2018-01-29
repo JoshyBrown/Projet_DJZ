@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -16,18 +14,17 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * Entity Client abstract (strategy JOINED TABLE)
+ * Entity Client
  * 
  * @author JW
  *
  */
 
 
-@JsonIgnoreProperties(value = {"conseiller"})
+@JsonIgnoreProperties(value = {"conseiller"}, allowSetters = true)
 @Entity
 @Table(name = "client")
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Client {
+public class Client {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,6 +32,9 @@ public abstract class Client {
 	
 	@Column(unique = true)
 	private String refClient;
+	
+	private String nom;
+	private String prenom;
 
 	@Embedded
 	private Adresse adresse;
@@ -56,9 +56,11 @@ public abstract class Client {
 		this.setCompteEpargne(new CompteEpargne());
 	}
 
-	public Client(String refClient, Adresse adresse) {
+	public Client(String nom, String prenom, String refClient, Adresse adresse) {
 		super();
 		this.refClient = refClient;
+		this.nom = nom;
+		this.prenom = prenom;
 		this.adresse = adresse;
 
 		this.setCompteCourant(new CompteCourant());
@@ -76,7 +78,23 @@ public abstract class Client {
 	public String getRefClient() {
 		return refClient;
 	}
+	
+	public String getNom() {
+		return nom;
+	}
 
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+	
 	public void setRefClient(String refClient) {
 		this.refClient = refClient;
 	}
