@@ -16,19 +16,8 @@ export class ListeClientsComponent implements OnInit {
 
   constructor(private conseillerCLientService: ConseillerClientService, private alertService: AlertService) { }
 
-  deleteUser(client) {
-    console.log('Client a supprimer : ' + JSON.stringify(client));
-
-    this.conseillerCLientService.deleteClient(client)
-      .subscribe(() => { this.getAllClients() }), error => this.alertService.error(error);
-
-      return false;
-  }
-
   getAllClients() {
-    const id = 2;
-    
-    this.conseillerCLientService.getClientsByConseiller(id)
+    this.conseillerCLientService.getClientsByConseiller(JSON.parse(localStorage.getItem('currentUser')).id)
       .subscribe(data => this.clients = data, error => this.alertService.error(error));
 
     return false;

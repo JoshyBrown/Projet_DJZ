@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 
 import { UpdateclientComponent } from './updateclient/updateclient.component';
 import { ListeClientsComponent } from './liste-clients/liste-clients.component';
-import { ListeClientRowComponent } from './liste-client-row/liste-client-row.component';
 import { VirementComponent } from './virement/virement.component';
 import { LoginComponent } from './login/login.component';
 import { AlertComponent } from './alert/alert.component';
@@ -24,18 +23,23 @@ import { ConseillerClientService } from './service/conseiller-client.service';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 
+import { ListeConseillersComponent } from './liste-conseillers/liste-conseillers.component';
+import { DeleteClientComponent } from './delete-client/delete-client.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     UpdateclientComponent,
     ListeClientsComponent,
-    ListeClientRowComponent,
     VirementComponent,
     LoginComponent,
     AlertComponent,
     ProfileComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    ListeConseillersComponent,
+    DeleteClientComponent
   ],
   imports: [
     BrowserModule, 

@@ -35,12 +35,17 @@ updateClient(id): Observable<Client> {
 }
 
 
+<<<<<<< HEAD
   updateClient(client): Observable<Client> {
     return this.http.put<Client>(this.client_url, client);
   }
 */
   deleteClient(client): Observable<any> {
     return this.http.delete(this.client_url, client);
+=======
+  deleteClient(id): Observable<any> {
+    return this.http.delete<Client>(this.client_url + '/' + id);
+>>>>>>> c8196080cfbc4591f5142642509e02d79f5fe2ee
   }
 
   getClientsByConseiller(id): Observable<Client[]> {

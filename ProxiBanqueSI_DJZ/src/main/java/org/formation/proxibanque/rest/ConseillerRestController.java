@@ -61,20 +61,29 @@ public class ConseillerRestController implements IConseillerRestController {
 			LOGGER.info("Logger reussi : " + user.getNom() + " " + user.getPrenom());
 			
 			return ResponseEntity.ok(user);
-		} else
+		} else {
+			LOGGER.error("Client avec login non trouve");
 			return ResponseEntity.notFound().build();
+		}
 	}
 	
 	@Override
 	public ResponseEntity<Client> chercherClient(@PathVariable(value = "id") Long clientId) {
 		try {
+			LOGGER.info("Chercher client id : " + clientId);
+			
 			Client foundClient = conseillerService.chercherClient(clientId);
-			if (null == foundClient)
+			if (null == foundClient) {
+				LOGGER.error("Client avec id : " + clientId + " non trouve");
 				return ResponseEntity.notFound().build();
+			}
+			
+			LOGGER.info("Client trouve : " + foundClient.getNom() + " " + foundClient.getPrenom());
 			
 			return ResponseEntity.ok(foundClient);
 
-		} catch (DaoException e) {
+		} catch (DaoException e) {			
+			LOGGER.error("Exception : " + e.getMessage());			
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
@@ -91,9 +100,12 @@ public class ConseillerRestController implements IConseillerRestController {
 		try {
 			conseillerService.ajouterClient(client);
 			
+			LOGGER.info("Client ajoute : Id=" + client.getId() + " " + client.getNom() + " " + client.getPrenom());
+			
 			return ResponseEntity.ok(client);
 			
 		} catch (DaoException e) {
+			LOGGER.error("Exception : " + e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
@@ -110,8 +122,11 @@ public class ConseillerRestController implements IConseillerRestController {
 		try {
 			conseillerService.modifierClient(client);
 			
+			LOGGER.info("Client modifie : Id=" + client.getId() + " " + client.getNom() + " " + client.getPrenom());
+			
 			return ResponseEntity.ok(client);
 		} catch (Exception e) {
+			LOGGER.error("Exception : " + e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
@@ -124,12 +139,22 @@ public class ConseillerRestController implements IConseillerRestController {
 	 * @throws DaoException
 	 *             DaoException
 	 */
-	public ResponseEntity<Client> supprimerClient(@Valid @RequestBody Client client) {
+	public ResponseEntity<Client> supprimerClient(@PathVariable(value = "id") Long clientId) {
 		try {
-			conseillerService.supprimerClient(client);
 			
-			return ResponseEntity.ok(client);
+			Client foundClient = conseillerService.chercherClient(clientId);
+			if (null == foundClient) {
+				LOGGER.error("Client avec id : " + clientId + " non trouve");
+				return ResponseEntity.notFound().build();
+			}
+			
+			conseillerService.supprimerClient(foundClient);
+			
+			LOGGER.info("Client supprime : Id=" + foundClient.getId() + " " + foundClient.getNom() + " " + foundClient.getPrenom());
+			
+			return ResponseEntity.ok(foundClient);
 		} catch (DaoException e) {
+			LOGGER.error("Exception : " + e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
@@ -145,8 +170,11 @@ public class ConseillerRestController implements IConseillerRestController {
 		try {
 			List<Client> clis = conseillerService.listerTousClients();
 			
+			LOGGER.info("Clients trouves : nombre=" + clis.size());
+			
 			return ResponseEntity.ok(clis);
 		} catch (DaoException e) {
+			LOGGER.error("Exception : " + e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
@@ -162,8 +190,11 @@ public class ConseillerRestController implements IConseillerRestController {
 		try {
 			List<Client> clis = conseillerService.listerClientsDeConseiller(idConseiller);
 			
+			LOGGER.info("Clients du conseiller id=" + idConseiller + " trouves : nombre=" + clis.size());
+			
 			return ResponseEntity.ok(clis);
 		} catch (DaoException e) {
+			LOGGER.error("Exception : " + e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}

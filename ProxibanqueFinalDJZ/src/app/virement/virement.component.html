@@ -5,13 +5,13 @@
 
     <tr>
       <td>
-        <label for="debiteurselect">Selectionnez un debiteur : </label>
+        <label for="debiteurselect">Selectionnez le client à débiter : </label>
         <select class="form-control" name="debiteurselect" id="debiteurselect">
           <option *ngFor="let client of clients" value='client.id'>{{client.nom}} {{client.prenom}} ({{client.refClient}})</option>
         </select>
       </td>
       <td>
-        <label for="debcomptselect">Selectionnez son compte a debiter : </label>
+        <label for="debcomptselect">Selectionnez le compte à débiter : </label>
         <select class="form-control" name="debcomptselect" id="debcomptselect">
           <option value="courant">Compte Courant</option>
           <option value="epargne">Compte Epargne</option>
@@ -23,13 +23,13 @@
 
     <tr>
       <td>
-        <label for="crediteurselect">Selectionnez un crediteur : </label>
+        <label for="crediteurselect">Selectionnez le client à crediter : </label>
         <select class="form-control" name="crediteurselect" id="crediteurselect">
           <option *ngFor="let client of allClients" value="client.id">{{client.nom}} {{client.prenom}} ({{client.refClient}})</option>
         </select>
       </td>
       <td>
-        <label for="crdcomptselect">Selectionnez son compte a debiter : </label>
+        <label for="crdcomptselect">Selectionnez le compte à créditer : </label>
         <select class="form-control" name="crdcomptselect" id="crdcomptselect">
           <option value="courant">Compte Courant</option>
           <option value="epargne">Compte Epargne</option>
