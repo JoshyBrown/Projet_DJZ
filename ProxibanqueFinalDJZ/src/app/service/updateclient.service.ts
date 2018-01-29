@@ -10,13 +10,15 @@ import 'rxjs/add/operator/catch';
 export class UpdateclientService {
 
   constructor(private httpService: Http) { }
-//  getCli(): Observable<any> {
-//    console.log('Here I have the list');
-//    return this.httpService.get('http://localhost:8080/SimpleMavenJPAWeb/displayClients')
-//      .map((res: Response) => res.json())
-//      .catch((error: any) => Observable.throw('Big problem!'));
-//
-//  }
+
+
+  getCli(): Observable<any> {
+    console.log('Here I have the list');
+    return this.httpService.get('http://localhost:3000/displayClients/1')
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw('Big problem!'));
+
+  }
 
 
 }
