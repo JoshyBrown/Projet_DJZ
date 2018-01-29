@@ -21,7 +21,9 @@ export class UpdateclientComponent implements OnInit {
     private alertService: AlertService ) { }
 
   onSubmit() {
-
+    
+    console.log('Client a modifier : ' + JSON.stringify(this.actualClient));
+    
     this.conseillerCLientService.updateClient(this.actualClient)
       .subscribe(data => this.actualClient = data, error => this.alertService.error(error));
   }

@@ -25,7 +25,7 @@ export class AuthenticationService {
     auth(login: string, password: string) {
         console.log(`login service ${login} ${password}`);
 
-        var jsonBody: any = { '@class': 'org.formation.proxibanque.entity.Conseiller', login: login, password: password };
+        const jsonBody: any = { '@class': 'org.formation.proxibanque.entity.Conseiller', login: login, password: password };
 
         return this.http.post<any>(this.auth_url, jsonBody)
             .map(user => {

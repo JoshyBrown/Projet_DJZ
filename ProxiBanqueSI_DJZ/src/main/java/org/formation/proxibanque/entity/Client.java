@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 
 
-@JsonIgnoreProperties(value = {"conseiller"}, allowSetters = true)
+//@JsonIgnoreProperties(value = {"conseiller"}, allowSetters = true)
 @Entity
 @Table(name = "client")
 public class Client {
