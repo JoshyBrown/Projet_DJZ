@@ -29,8 +29,8 @@ public interface IConseillerRestController {
 	@PutMapping("/clients")
 	public ResponseEntity<Client> modifierClient(@Valid @RequestBody Client client);
 	
-	@DeleteMapping("/clients")
-	public ResponseEntity<Client> supprimerClient(@Valid @RequestBody Client client);
+	@DeleteMapping("/clients/{id}")
+	public ResponseEntity<Client> supprimerClient(@PathVariable(value = "id") Long clientId);
 	
 	@GetMapping("/clients")
 	public ResponseEntity<List<Client>> listerTousClients();
