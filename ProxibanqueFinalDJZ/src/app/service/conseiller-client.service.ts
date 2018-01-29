@@ -28,8 +28,8 @@ export class ConseillerClientService {
     return this.http.put<Client>(this.client_url, client);
   }
 
-  deleteClient(client): Observable<any> {
-    return this.http.delete(this.client_url, client);
+  deleteClient(id): Observable<any> {
+    return this.http.delete<Client>(this.client_url + '/' + id);
   }
 
   getClientsByConseiller(id): Observable<Client[]> {
