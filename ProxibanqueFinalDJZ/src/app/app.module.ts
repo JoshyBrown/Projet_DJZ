@@ -23,6 +23,7 @@ import { JwtInterceptor } from './service/jwt.interceptor';
 import { ConseillerClientService } from './service/conseiller-client.service';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
+import { ListeConseillersComponent } from './liste-conseillers/liste-conseillers.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { HeaderComponent } from './header/header.component';
     AlertComponent,
     ProfileComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    ListeConseillersComponent
   ],
   imports: [
     BrowserModule, 
