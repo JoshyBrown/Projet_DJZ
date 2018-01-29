@@ -29,23 +29,9 @@ export class ConseillerClientService {
   updateClient(client): Observable<Client> {
     return this.http.put<Client>(this.client_url, client);
   }
-/* SERVICE PAR Zlatka
-updateClient(id): Observable<Client> {
-  return this.http.put<Client>(this.client_url, id);
-}
 
-
-<<<<<<< HEAD
-  updateClient(client): Observable<Client> {
-    return this.http.put<Client>(this.client_url, client);
-  }
-*/
-  deleteClient(client): Observable<any> {
-    return this.http.delete(this.client_url, client);
-=======
   deleteClient(id): Observable<any> {
     return this.http.delete<Client>(this.client_url + '/' + id);
->>>>>>> c8196080cfbc4591f5142642509e02d79f5fe2ee
   }
 
   getClientsByConseiller(id): Observable<Client[]> {
