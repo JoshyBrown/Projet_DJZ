@@ -25,10 +25,10 @@
 							<td>{{client.compteCourant.solde}}</td>
 							<td>{{client.compteEpargne.solde}}</td>
 							<td>
-								<a class="nav-link" [routerLink]="['/update-client', client.id]">Détails</a>
+								<button class="btn" (click)="goToDetails(client)">Détails</button>
 							</td>
 							<td>
-								<a class="nav-link" [routerLink]="['/delete-client', client.id]">Supprimer</a>
+								<button class="btn" (click)="deleteClient(client)">Supprimer</button>
 							</td>
 						</tr>
 					</tbody>
