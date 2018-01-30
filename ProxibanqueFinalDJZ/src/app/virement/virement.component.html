@@ -2,31 +2,26 @@
 
 <form class="well" (ngSubmit)="onSubmit()" #virementForm='ngForm' novalidate>
 	<table>
-<!-- 		<colgroup> -->
-<!-- 			<col class="col-md-4"> -->
-<!-- 			<col class="col-md-4"> -->
-<!-- 			<col class="col-md-4"> -->
-<!-- 		</colgroup> -->
 		<tr>
 			<td>
 				<div id="debiteur">
 					<table>
 						<tr>
-							<td><label for="debiteurselect">Selectionnez le client à débiter : </label> <select class="form-control"
-								name="debiteurselect" id="debiteurselect"
+							<td><label for="debiteurselect">Sélectionner le client à débiter : </label> 
+							<select class="form-control" name="debiteurselect" id="debiteurselect"
 								(ngModelChange)="selectDebiteur($event)" (ngModel)="clientDebiteur">
 									<option *ngFor="let client of clients" [ngValue]="client">{{client.nom}}
 										{{client.prenom}} ({{client.refClient}})</option>
 							</select></td>
 						</tr>
 						<tr>
-							<td><label for="debcomptselect">Selectionnez le
-									compte à débiter : </label> <select class="form-control"
-								name="debcomptselect" id="debcomptselect"
+							<td><label for="debcomptselect">Sélectionner le compte à débiter : </label> 
+							<select class="form-control" name="debcomptselect" id="debcomptselect"
 								(ngModelChange)="selectDepart($event)" (ngModel)="compteDepart">
 									<option *ngFor="let compte of departs" [ngValue]="compte">{{compte.numCompte}}
 										{{compte.solde}}</option>
-							</select></td>
+							</select>
+							</td>
 						</tr>
 					</table>
 				</div>
@@ -36,8 +31,7 @@
 				<div id="crediteur">
 					<table>
 						<tr>
-							<td><label for="crediteurselect">Selectionnez le
-									client à crediter : </label> 
+							<td><label for="crediteurselect">Sélectionner le client à créditer : </label> 
 								<select class="form-control" name="crediteurselect" id="crediteurselect"
 								(ngModelChange)="selectCrediteur($event)" (ngModel)="clientCrediteur">
 									<option *ngFor="let client of allClients" [ngValue]="client">{{client.nom}}
@@ -45,9 +39,8 @@
 							</select></td>
 						</tr>
 						<tr>
-							<td><label for="crdcomptselect">Selectionnez le
-									compte à créditer : </label> <select class="form-control"
-								name="crdcomptselect" id="crdcomptselect" 
+							<td><label for="crdcomptselect">Sélectionner le compte à créditer : </label> 
+							<select class="form-control" name="crdcomptselect" id="crdcomptselect" 
 								(ngModelChange)="selectCible($event)" (ngModel)="compteCible">
 									<option *ngFor="let compte of cibles" [ngValue]="compte">{{compte.numCompte}}
 										{{compte.solde}}</option>
@@ -60,7 +53,7 @@
 
 		<tr>
 			<td></td>
-			<td><label for="montant">Le montant a virer : </label> <input
+			<td><label for="montant">Le montant à virer : </label> <input
 				type="text" id="montant" name="montant"
 				placeholder="Saisissez le montant" /></td>
 			<td></td>
@@ -73,28 +66,15 @@
 		</tr>
 	</table>
 </form>
-
+<br>
 <table class="table table-bordered table-striped">
 	<thead>
 		<tr>
-			<th>Debiteur</th>
+			<th>Débiteur</th>
 			<th>Nouveau Solde</th>
-			<th>Crediteur</th>
+			<th>Créditeur</th>
 			<th>Nouveau Solde</th>
-			<th>Montant vire</th>
+			<th>Montant viré</th>
 		</tr>
 	</thead>
-<!-- 	<tbody> -->
-<!-- 		<tr> -->
-<!-- 			<td>{{debiteur.nom}} {{debiteur.prenom}}</td> -->
-
-<!-- 			<td>depart.solde</td> -->
-
-<!-- 			<td>{{crediteur.nom}} {{crediteur.prenom}}</td> -->
-
-<!-- 			<td>cible.solde</td> -->
-
-<!-- 			<td>montant</td> -->
-<!-- 		</tr> -->
-<!-- 	</tbody> -->
 </table>
