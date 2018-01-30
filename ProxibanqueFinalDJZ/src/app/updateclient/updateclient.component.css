@@ -1,11 +1,10 @@
-.tableau1 {
-    margin: 0 auto;
+.container {
+    background-color:#ffffff;
 }
 
-.tableau2 {
-    margin: 50px;
-}
-
-.tableau3 {
-    margin: 50px;
+.btn-primary {
+    margin: 5px;
+	width: 300px;
+	padding: 10px;
+	margin-left: 280px;
 }
