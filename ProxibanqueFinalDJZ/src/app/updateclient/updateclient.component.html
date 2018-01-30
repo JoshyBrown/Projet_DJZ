@@ -14,13 +14,13 @@
 							<tr>
 								<th>Référence</th>
 								<td>
-									<input type="text" required [(ngModel)]='actualClient.refClient' name='ref' #ref='ngModel' />
+									<input type="text" required [(ngModel)]='actualClient.refClient' name='ref' #ref='ngModel'/>
 								</td>
 							</tr>
 							<tr>
 								<th>Nom du client</th>
 								<td>
-									<input type="text" required [(ngModel)]='actualClient.nom' name='nom' #nom='ngModel' />
+									<input type="text" required [(ngModel)]='actualClient.nom' name='nom' #nom='ngModel'  pattern="[a-zA-Z ]*"/>
 								</td>
 							</tr>
 							<tr>
@@ -69,8 +69,7 @@
 							<tr>
 								<th>Date d'ouverture</th>
 								<td>
-									<input type="text" disabled [(ngModel)]='actualClient.compteCourant.dateOuverture' name='dateOuverture' #dateOuverture='ngModel'
-									/>
+									<p>{{actualClient.compteCourant.dateOuverture | date:'short'}}</p>
 								</td>
 							</tr>
 							<tr>
@@ -109,8 +108,7 @@
 							<tr>
 								<th>Date d'ouverture</th>
 								<td>
-									<input type="text" disabled [(ngModel)]='actualClient.compteEpargne.dateOuverture' name='dateOuvertureEpargne' #dateOuvertureEpargne='ngModel'
-									/>
+									<p>{{actualClient.compteEpargne.dateOuverture | date:'short'}}</p>
 								</td>
 							</tr>
 							<tr>
