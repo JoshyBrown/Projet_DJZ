@@ -40,10 +40,11 @@ public class VirementRestController implements IVirementRestController {
 	@Override
 	public ResponseEntity<Virement> faireVirement(@Valid @RequestBody Virement virement) {
 		try {
-			virementService.faireVirement(virement.getClientCrediteur(), virement.getDepart(), 
-					virement.getClientCrediteur(), virement.getCible(), virement.getMontant());
+			if (virementService.faireVirement(virement)) {
+				return ResponseEntity.ok(virement);
+			}
 			
-			return ResponseEntity.ok(virement);
+			return  ResponseEntity.notFound().build();
 			
 		} catch (DaoException e) {
 			LOGGER.error("Exception : " + e.getMessage());

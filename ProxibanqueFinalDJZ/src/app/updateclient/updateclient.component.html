@@ -14,7 +14,7 @@
 							<tr>
 								<th>Référence</th>
 								<td>
-									<input type="text" required [(ngModel)]='actualClient.refClient' name='ref' #ref='ngModel'/>
+									<input type="text" [(ngModel)]='actualClient.refClient' name='ref' #ref='ngModel'/>
 								</td>
 							</tr>
 							<tr>
@@ -75,13 +75,13 @@
 							<tr>
 								<th>Numéro de compte</th>
 								<td>
-									<input type="text" required [(ngModel)]='actualClient.compteCourant.numCompte' name='numCompte' #numCompte='ngModel' />
+									<input type="text" [(ngModel)]='actualClient.compteCourant.numCompte' name='numCompte' #numCompte='ngModel' />
 								</td>
 							</tr>
 							<tr>
 								<th>Solde du compte</th>
 								<td>
-									<input type="number" required [(ngModel)]='actualClient.compteCourant.solde' name='solde' #solde='ngModel' />
+									<input type="number" step="0.01" required [(ngModel)]='actualClient.compteCourant.solde' name='solde' #solde='ngModel' /> €
 								</td>
 							</tr>
 							<tr>
@@ -114,20 +114,20 @@
 							<tr>
 								<th>Numéro de compte</th>
 								<td>
-									<input type="text" required [(ngModel)]='actualClient.compteEpargne.numCompte' name='numCompteEpargne' #numCompteEpargne='ngModel'
+									<input type="text" [(ngModel)]='actualClient.compteEpargne.numCompte' name='numCompteEpargne' #numCompteEpargne='ngModel'
 									/>
 								</td>
 							</tr>
 							<tr>
 								<th>Solde du compte</th>
 								<td>
-									<input type="number" required [(ngModel)]='actualClient.compteEpargne.solde' name='soldeEpargne' #soldeEpargne='ngModel' />
+									<input type="number" step="0.01" required [(ngModel)]='actualClient.compteEpargne.solde' name='soldeEpargne' #soldeEpargne='ngModel' /> €
 								</td>
 							</tr>
 							<tr>
 								<th>Taux de rémunération</th>
 								<td>
-									<input type="text" required [(ngModel)]='actualClient.compteEpargne.tauxInteret' name='tauxInteretEpargne' #tauxInteretEpargne='ngModel'
+									<input type="number" step="0.01" required [(ngModel)]='actualClient.compteEpargne.tauxInteret' name='tauxInteretEpargne' #tauxInteretEpargne='ngModel'
 									/>
 								</td>
 							</tr>
