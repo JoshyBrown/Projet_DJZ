@@ -3,8 +3,9 @@ import {Compte} from './compte';
 
 export class Virement {
   id: string;
-  debiteur: Client = new Client();
-  crediteur: Client  = new Client();
+  dateOperation: Date = new Date();
+  clientDebiteur: Client = new Client();
+  clientCrediteur: Client  = new Client();
   depart: Compte;
   cible: Compte;
   montant: number;

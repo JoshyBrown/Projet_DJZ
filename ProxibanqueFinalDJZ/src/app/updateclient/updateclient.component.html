@@ -93,7 +93,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<a class="btn" *ngIf="!actualClient.compteCourant.etatActif" (click)="actualClient.compteCourant.etatActif=true">Activer</a>
+					<a class="nav-link" *ngIf="!actualClient.compteCourant.etatActif" (click)="actualClient.compteCourant.etatActif=true">Activer</a>
 				</div>
 			</div>
 
@@ -133,15 +133,15 @@
 							</tr>
 						</tbody>
 					</table>
-					<a class="btn" *ngIf="!actualClient.compteEpargne.etatActif" (click)="actualClient.compteEpargne.etatActif=true">Activer</a>
+					<a class="nav-link" *ngIf="!actualClient.compteEpargne.etatActif" (click)="actualClient.compteEpargne.etatActif=true">Activer</a>
 				</div>
 			</div>
 			
 		</div>
 	</div>
-</form>
-
 <div class="mesBoutons">
 	<button *ngIf="null != actualClient.id" type='submit' class="btn btn-primary">Mettre à jour le client</button>
 	<button *ngIf="null == actualClient.id" type='submit' class="btn btn-primary">Ajouter le client</button>
 </div>
+</form>
+
