@@ -51,7 +51,7 @@ public class GerantService implements IGerantService {
 
 		// Strategy local de generer reference conseiller automatique
 		if (conseiller.getRefEmployee().isEmpty())
-			conseiller.setRefEmployee(Config.PREFIX_CONS_REF + conseiller.getId());
+			conseiller.setRefEmployee(ConstantsConfig.PREFIX_CONS_REF + conseiller.getId());
 
 		daoConseiller.save(conseiller);
 	}

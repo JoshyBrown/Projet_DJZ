@@ -7,7 +7,7 @@ package org.formation.proxibanque.service;
  * @author JW
  *
  */
-public class Config {
+public class ConstantsConfig {
 	public static final String PREFIX_CLI_REF = "CL00";
 	public static final String PREFIX_CONS_REF = "CS00";
 	

@@ -19,8 +19,16 @@
 			<td>{{client.refClient}}</td>
 			<td>{{client.nom}}</td>
 			<td>{{client.prenom}}</td>
-			<td>{{client.compteCourant.solde}}</td>
-			<td>{{client.compteEpargne.solde}}</td>
+			<td>
+				<div *ngIf="client.compteCourant.etatActif">{{client.compteCourant.solde}}</div>
+				<div *ngIf="!client.compteCourant.etatActif">
+					<a class="nav-link" [routerLink]="['/update-client', client.id]">Activer</a></div>
+			</td>
+			<td>
+				<div *ngIf="client.compteCourant.etatActif">{{client.compteEpargne.solde}}</div>
+				<div *ngIf="!client.compteCourant.etatActif">
+					<a class="nav-link" [routerLink]="['/update-client', client.id]">Activer</a></div>
+			</td>
 			<td>
 				<button class="btn" (click)="goToDetails(client)">Détails</button>
 			</td>
