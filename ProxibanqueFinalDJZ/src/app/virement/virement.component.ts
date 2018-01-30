@@ -17,13 +17,29 @@ export class VirementComponent implements OnInit {
 
   clients: Client[];
   allClients: Client[];
-
+  
+  clientDebiteur: Client;
+  
   virement: Virement;
 
   constructor(
     private conseillerCLientService: ConseillerClientService,
     private virementService: VirementService,
     private alertService: AlertService) { }
+  
+  selectDebiteur(client: Client): void {
+    console.log(JSON.stringify(client));
+  }
+  
+  selectCrediteur(client: Client): void {
+    console.log(JSON.stringify(client));
+  }
+
+  onSubmit() {
+    console.log(JSON.stringify(this.clientDebiteur));
+    this.virementService.doVirement(this.virement)
+      .subscribe(data => this.virement = data, error => this.alertService.error(error.message));
+  }
   
   getClientsByConseiller() {
     this.conseillerCLientService.getClientsByConseiller(JSON.parse(localStorage.getItem('currentUser')).id)
@@ -37,15 +53,6 @@ export class VirementComponent implements OnInit {
       .subscribe(data => this.allClients = data, error => this.alertService.error(error.message));
 
     return false;
-  }
-
-  selectDebiteur(client: Client): void {
-    console.log(client);
-  }
-
-  onSubmit() {
-    this.virementService.doVirement(this.virement)
-      .subscribe(data => this.virement = data, error => this.alertService.error(error.message));
   }
 
   ngOnInit() {

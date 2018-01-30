@@ -64,7 +64,7 @@ public class ConseillerService implements IConseillerService {
 
 			// Strategy local de generer reference client automatique
 			if (client.getRefClient().isEmpty())
-				client.setRefClient(Config.PREFIX_CLI_REF + client.getId());
+				client.setRefClient(ConstantsConfig.PREFIX_CLI_REF + client.getId());
 
 			daoClient.save(client);
 		} catch (Exception e) {

@@ -9,6 +9,8 @@ import org.formation.proxibanque.entity.Agence;
 import org.formation.proxibanque.entity.Client;
 import org.formation.proxibanque.entity.Conseiller;
 import org.formation.proxibanque.service.IGerantService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +31,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class GerantRestController implements IGerantRestController {
-
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(GerantRestController.class);
+	
 	@Autowired
-	private IGerantService gerantController;
+	private IGerantService gerantService;
 	
 	public GerantRestController() {
 		super();
@@ -40,13 +44,14 @@ public class GerantRestController implements IGerantRestController {
 	@Override
 	public ResponseEntity<Conseiller> chercherConseiller(@PathVariable(value = "id") Long idConseiller) {
 		try {
-			Conseiller foundConseiller = gerantController.chercherConseiller(idConseiller);
+			Conseiller foundConseiller = gerantService.chercherConseiller(idConseiller);
 			if (null == foundConseiller)
 				return ResponseEntity.notFound().build();
 			
 			return ResponseEntity.ok(foundConseiller);
 
 		} catch (DaoException e) {
+			LOGGER.error("Exception : " + e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
@@ -54,11 +59,12 @@ public class GerantRestController implements IGerantRestController {
 	@Override
 	public ResponseEntity<Conseiller> ajouterConseiller(@Valid @RequestBody Conseiller conseiller) {
 		try {
-			gerantController.ajouterConseiller(conseiller);
+			gerantService.ajouterConseiller(conseiller);
 			
 			return ResponseEntity.ok(conseiller);
 			
 		} catch (DaoException e) {
+			LOGGER.error("Exception : " + e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
@@ -66,10 +72,11 @@ public class GerantRestController implements IGerantRestController {
 	@Override
 	public ResponseEntity<Conseiller> modifierConseiller(@Valid @RequestBody Conseiller conseiller) {
 		try {
-			gerantController.modifierConseiller(conseiller);
+			gerantService.modifierConseiller(conseiller);
 			
 			return ResponseEntity.ok(conseiller);
 		} catch (Exception e) {
+			LOGGER.error("Exception : " + e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
@@ -77,22 +84,25 @@ public class GerantRestController implements IGerantRestController {
 	@Override
 	public ResponseEntity<Conseiller> supprimerConseiller(@Valid @RequestBody Conseiller conseiller) {
 		try {
-			gerantController.supprimerConseiller(conseiller);
+			gerantService.supprimerConseiller(conseiller);
 			
 			return ResponseEntity.ok(conseiller);
 		} catch (DaoException e) {
+			LOGGER.error("Exception : " + e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-		
-		
 	}
 
 	@Override
 	public ResponseEntity<List<Conseiller>> listerConseillersDuGerant(@PathVariable(value = "id") Long idGerent) {
 		try {
-			List<Conseiller> cons = gerantController.listerConseillersDuGerant(idGerent); 
+			
+			List<Conseiller> cons = gerantService.listerConseillersDuGerant(idGerent); 
+			LOGGER.info("Clients trouves : nombre=" + cons.size());
+			
 			return ResponseEntity.ok(cons);
 		} catch (DaoException e) {
+			LOGGER.error("Exception : " + e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}    
 	}
