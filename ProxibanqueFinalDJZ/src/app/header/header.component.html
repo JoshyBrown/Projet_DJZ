@@ -1,32 +1,34 @@
-<div class="page-header">
-  <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" [routerLink]="['/home']">Proxi Banque SI</a>
+<div class="container">
+  <div class="page-header">
+    <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" [routerLink]="['/home']">Proxi Banque SI</a>
 
-    <div class="navbar-collapse collapse">
+      <div class="navbar-collapse collapse">
 
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/home']">Accueil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/gestion-client']">Gestion des clients</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/update-client']">Ajout de client</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/virement']">Virement</a>
-        </li>
-      </ul>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/home']">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/gestion-client']">Gestion des clients</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/update-client']">Ajout de client</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/virement']">Virement</a>
+          </li>
+        </ul>
 
-      <ul class="navbar-nav">
-        <li class="nav-item" *ngIf="isLoggedIn$ | async">
-          <a class="nav-link" [routerLink]="['/profile']">{{currentUser.nom}} {{currentUser.prenom}}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/login']">Déconnexion</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+        <ul class="navbar-nav">
+          <li class="nav-item" *ngIf="isLoggedIn$ | async">
+            <a class="nav-link" [routerLink]="['/profile']">{{currentUser.nom}} {{currentUser.prenom}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/login']">Déconnexion</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </div>
