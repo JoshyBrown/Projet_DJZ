@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { ConseillerClientService } from '../service/conseiller-client.service';
 import { AlertService } from '../service/alert.service';
+import * as CONST from '../constants';
 import { Client } from '../model/client';
 
 @Component({
@@ -14,6 +15,8 @@ import { Client } from '../model/client';
 export class UpdateclientComponent implements OnInit {
 
   actualClient: Client;
+
+  private clients_list_url: string = CONST.REST_HOST + '/clients';
 
   constructor(
     private conseillerCLientService: ConseillerClientService,
