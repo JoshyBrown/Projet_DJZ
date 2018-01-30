@@ -68,7 +68,7 @@ public class ConseillerService implements IConseillerService {
 
 			daoClient.save(client);
 		} catch (Exception e) {
-			throw new DaoException("ConseillerService.ajouterClient" + e);
+			throw new DaoException("ConseillerService.ajouterClient " + e);
 		}
 	}
 

@@ -28,8 +28,10 @@ export class UpdateclientComponent implements OnInit {
 
   onSubmit() {
     if (null == this.actualClient.id) {
+      this.actualClient.conseiller = JSON.parse(localStorage.getItem('currentUser'));
+      
       console.log('Client a ajouter : ' + JSON.stringify(this.actualClient));
-  
+        
       this.conseillerCLientService.addClient(this.actualClient)
         .subscribe(data => { this.actualClient = data; this.alertService.success('Nouveau client ajoute');},
                     error => this.alertService.error(error.message));

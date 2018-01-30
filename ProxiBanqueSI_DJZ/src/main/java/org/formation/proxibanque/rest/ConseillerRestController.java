@@ -97,6 +97,8 @@ public class ConseillerRestController implements IConseillerRestController {
 	 */
 	public ResponseEntity<Client> ajouterClient(@Valid @RequestBody Client client) {
 		try {
+			LOGGER.info("Client a ajoute : Id=" + client.getId() + " " + client.getNom() + " " + client.getPrenom());
+			
 			conseillerService.ajouterClient(client);
 			
 			LOGGER.info("Client ajoute : Id=" + client.getId() + " " + client.getNom() + " " + client.getPrenom());
@@ -119,6 +121,8 @@ public class ConseillerRestController implements IConseillerRestController {
 	 */
 	public ResponseEntity<Client> modifierClient(@Valid @RequestBody Client client) {
 		try {
+			LOGGER.info("Client a modifie : Id=" + client.getId() + " " + client.getNom() + " " + client.getPrenom());
+						
 			conseillerService.modifierClient(client);
 			
 			LOGGER.info("Client modifie : Id=" + client.getId() + " " + client.getNom() + " " + client.getPrenom());

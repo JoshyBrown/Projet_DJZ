@@ -1,7 +1,7 @@
 export class Compte {
     id: string;
     numCompte: string;
-    solde: number;
-    etatActif: boolean;
+    solde: number = 0;
+    etatActif: boolean = false;
     dateOuverture: Date;
 }
