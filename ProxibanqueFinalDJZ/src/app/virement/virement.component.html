@@ -53,9 +53,9 @@
 
 		<tr>
 			<td></td>
-			<td><label for="montant">Le montant à virer : </label> <input
-				type="text" id="montant" name="montant"
-				placeholder="Saisissez le montant" /></td>
+			<td><label for="montant">Le montant à virer : </label> 
+			<input type="text" id="montant" name="montant" placeholder="Saisissez le montant" 
+			[(ngModel)]='virement.montant' #montant='ngModel' /></td>
 			<td></td>
 		</tr>
 		<tr>

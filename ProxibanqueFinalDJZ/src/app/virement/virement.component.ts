@@ -28,6 +28,8 @@ export class VirementComponent implements OnInit {
   compteDepart: Compte;
   compteCible: Compte;
   
+  montant: number;
+  
   virement: Virement = new Virement();
 
   constructor(
@@ -37,7 +39,7 @@ export class VirementComponent implements OnInit {
 
   selectDebiteur(client: Client): void {
     console.log(JSON.stringify(client));
-    this.virement.debiteur = client;
+    this.virement.clientDebiteur = client;
 
     if (client.compteCourant.etatActif) {
       this.departs.push(client.compteCourant);
@@ -51,7 +53,7 @@ export class VirementComponent implements OnInit {
   selectCrediteur(client: Client): void {
     console.log(JSON.stringify(client));
     
-    this.virement.crediteur = client;
+    this.virement.clientCrediteur = client;
     
     if (client.compteCourant.etatActif) {
       this.cibles.push(client.compteCourant);
@@ -76,7 +78,7 @@ export class VirementComponent implements OnInit {
   
   onSubmit() {
 
-    console.log(JSON.stringify(this.virement));
+    console.log('Effectuer un virment : \n' + JSON.stringify(this.virement));
     this.virementService.doVirement(this.virement)
       .subscribe(data => this.virement = data, error => this.alertService.error(error.message));
   }

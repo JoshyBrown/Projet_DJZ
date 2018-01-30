@@ -14,7 +14,7 @@ import { Client } from '../model/client';
 })
 export class UpdateclientComponent implements OnInit {
 
-  actualClient: Client;
+  actualClient: Client = new Client();
 
   private clients_list_url: string = CONST.REST_HOST + '/clients';
 
@@ -27,6 +27,9 @@ export class UpdateclientComponent implements OnInit {
 
 
   onSubmit() {
+    
+    console.log('Client a traiter : ' + JSON.stringify(this.actualClient));
+    
     if (null == this.actualClient.id) {
       this.actualClient.conseiller = JSON.parse(localStorage.getItem('currentUser'));
       
