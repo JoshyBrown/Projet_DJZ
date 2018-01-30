@@ -7,6 +7,9 @@ import org.formation.proxibanque.entity.Client;
 import org.formation.proxibanque.entity.Compte;
 import org.formation.proxibanque.entity.CompteCourant;
 import org.formation.proxibanque.entity.Virement;
+import org.formation.proxibanque.rest.VirementRestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class VirementService implements IVirementService {
-
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(VirementService.class);
+	
 	@Autowired
 	private IDaoClient daoClient;
 
@@ -41,30 +46,57 @@ public class VirementService implements IVirementService {
 	 * @return true si le solde est suffisant
 	 */
 
-	private boolean checkMontantSolde(Compte depart, double montant) {
-		
-		if (montant < 0)
+	private boolean checkMontantSolde(Compte depart, Compte cible, double montant) {
+		if (depart.getId() == cible.getId()) {
+			LOGGER.error("Virement sur un meme compte interdit : " + depart.getId());
 			return false;
+		}else if (montant < 0) {
+			LOGGER.error("Montant negatif : " + montant);
+			return false;
+		}
 		else if ((depart.getSolde() >= montant) || (depart instanceof CompteCourant
 				&& ((CompteCourant) depart).getDecouvertAuthorise() + depart.getSolde() >= montant))
 			return true;
-		else
+		else {
+			LOGGER.error("Solde insuffisant : " + depart.getSolde() );
 			return false;
+		}
 	}
 	
 	@Override
 	@Transactional
-	public boolean faireVirement(Client debiteur, Compte depart, Client crediteur, Compte cible, double montant)
+	public boolean faireVirement(Virement virement)
 			throws DaoException {
-		if (checkMontantSolde(depart, montant)) {
+		
+		Client debiteur = virement.getClientDebiteur();
+		Client crediteur = virement.getClientCrediteur();
+		
+		if ( virement.getDepart().getId() == debiteur.getCompteCourant().getId() )
+			virement.setDepart(debiteur.getCompteCourant());
+		else
+			virement.setDepart(debiteur.getCompteEpargne());
+		
+		if ( virement.getCible().getId() == crediteur.getCompteCourant().getId() )
+			virement.setCible(crediteur.getCompteCourant());
+		else
+			virement.setCible(crediteur.getCompteEpargne());
+		
+		
+		LOGGER.info("Client (" + debiteur.getNom() + " " + debiteur.getPrenom() + ") " + " a effectue un virement : \n "
+				+ "compte depart : " + virement.getDepart().getNumCompte()
+				+ "\nbeneficiaire : " + crediteur.getNom() + " " + crediteur.getPrenom() 
+				+ " compte cible : " + virement.getCible().getNumCompte()
+				+ "\npour un montant : " + virement.getMontant());
+		
+		if (checkMontantSolde(virement.getDepart(), virement.getCible(), virement.getMontant())) {
 
-			depart.setSolde(depart.getSolde() - montant);
-			cible.setSolde(cible.getSolde() + montant);
+			virement.getDepart().setSolde(virement.getDepart().getSolde() - virement.getMontant());
+			virement.getCible().setSolde(virement.getCible().getSolde() + virement.getMontant());
 
 			// Insertion de virement dans table
 			daoClient.save(debiteur);
 			daoClient.save(crediteur);
-			daoVirement.save(new Virement(debiteur, depart, crediteur, cible, montant));
+			daoVirement.save(virement);
 			
 
 			return true;

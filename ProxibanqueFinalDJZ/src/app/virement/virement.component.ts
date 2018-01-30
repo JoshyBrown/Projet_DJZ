@@ -24,12 +24,10 @@ export class VirementComponent implements OnInit {
 
   clientDebiteur: Client;
   clientCrediteur: Client;
-  
+
   compteDepart: Compte;
   compteCible: Compte;
-  
-  montant: number;
-  
+
   virement: Virement = new Virement();
 
   constructor(
@@ -39,12 +37,15 @@ export class VirementComponent implements OnInit {
 
   selectDebiteur(client: Client): void {
     console.log(JSON.stringify(client));
+    
+    this.departs = new Array<Compte>();
+        
     this.virement.clientDebiteur = client;
 
     if (client.compteCourant.etatActif) {
       this.departs.push(client.compteCourant);
     }
-    
+
     if (client.compteEpargne.etatActif) {
       this.departs.push(client.compteEpargne);
     }
@@ -53,34 +54,43 @@ export class VirementComponent implements OnInit {
   selectCrediteur(client: Client): void {
     console.log(JSON.stringify(client));
     
+    this.cibles = new Array<Compte>();
+
     this.virement.clientCrediteur = client;
-    
+
     if (client.compteCourant.etatActif) {
       this.cibles.push(client.compteCourant);
     }
-    
+
     if (client.compteEpargne.etatActif) {
       this.cibles.push(client.compteEpargne);
     }
   }
-  
+
   selectDepart(compte: Compte) {
     console.log(JSON.stringify(compte));
     
     this.virement.depart = compte;
   }
-  
+
   selectCible(compte: Compte) {
     console.log(JSON.stringify(compte));
-    
+
     this.virement.cible = compte;
   }
-  
+
   onSubmit() {
 
-    console.log('Effectuer un virment : \n' + JSON.stringify(this.virement));
-    this.virementService.doVirement(this.virement)
-      .subscribe(data => this.virement = data, error => this.alertService.error(error.message));
+    if (this.virement.montant <= 0) {
+      confirm("Le montant à virer doit être positif");
+      return false;
+    } else {
+
+      console.log('Effectuer un virment : \n' + JSON.stringify(this.virement));
+      this.virementService.doVirement(this.virement)
+        .subscribe(data => {this.virement = data; this.alertService.success('Virement reussi');},
+        error => this.alertService.error(error.message));
+    }
   }
 
   getClientsByConseiller() {
