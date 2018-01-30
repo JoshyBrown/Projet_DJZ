@@ -28,22 +28,22 @@ export class UpdateclientComponent implements OnInit {
 
   onSubmit() {
     
-    console.log('Client a traiter : ' + JSON.stringify(this.actualClient));
+    console.log('Client à traiter : ' + JSON.stringify(this.actualClient));
     
     if (null == this.actualClient.id) {
       this.actualClient.conseiller = JSON.parse(localStorage.getItem('currentUser'));
       
-      console.log('Client a ajouter : ' + JSON.stringify(this.actualClient));
+      console.log('Client à ajouter : ' + JSON.stringify(this.actualClient));
         
       this.conseillerCLientService.addClient(this.actualClient)
-        .subscribe(data => { this.actualClient = data; this.alertService.success('Nouveau client ajoute');},
+        .subscribe(data => { this.actualClient = data; this.alertService.success('Nouveau client ajouté');},
                     error => this.alertService.error(error.message));
         
     } else {
-      console.log('Client a modifier : ' + JSON.stringify(this.actualClient));
+      console.log('Client à modifier : ' + JSON.stringify(this.actualClient));
   
       this.conseillerCLientService.updateClient(this.actualClient)
-        .subscribe(data => { this.actualClient = data; this.alertService.success('Enregistrement reussi');},
+        .subscribe(data => { this.actualClient = data; this.alertService.success('Enregistrement réussi');},
                     error => this.alertService.error(error.message));
     }
   }

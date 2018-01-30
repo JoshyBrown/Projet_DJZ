@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('home page actived');
+    console.log('home fonctionne');
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 

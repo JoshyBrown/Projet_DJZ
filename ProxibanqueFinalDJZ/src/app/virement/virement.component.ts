@@ -86,9 +86,9 @@ export class VirementComponent implements OnInit {
       return false;
     } else {
 
-      console.log('Effectuer un virment : \n' + JSON.stringify(this.virement));
+      console.log('Effectuer un virement : \n' + JSON.stringify(this.virement));
       this.virementService.doVirement(this.virement)
-        .subscribe(data => {this.virement = data; this.alertService.success('Virement reussi');},
+        .subscribe(data => {this.virement = data; this.alertService.success('Virement réussi');},
         error => this.alertService.error(error.message));
     }
   }
