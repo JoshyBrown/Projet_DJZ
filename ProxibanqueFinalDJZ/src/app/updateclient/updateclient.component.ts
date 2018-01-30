@@ -6,6 +6,7 @@ import { Adresse } from '../model/adresse';
 import { Client } from '../model/client';
 import { ConseillerClientService } from '../service/conseiller-client.service';
 import { AlertService } from '../service/alert.service';
+import * as CONST from '../constants';
 
 @Component({
   selector: 'app-updateclient',
@@ -16,6 +17,10 @@ import { AlertService } from '../service/alert.service';
 export class UpdateclientComponent implements OnInit {
 
   actualClient: Client;
+  
+  idClient: string;
+
+  private clients_list_url: string = CONST.REST_HOST + '/clients';
 
   constructor(
     private conseillerCLientService: ConseillerClientService, 
@@ -24,45 +29,25 @@ export class UpdateclientComponent implements OnInit {
     private myService: ConseillerClientService ) { }
   
   
-  // onSubmit() {
+   onSubmit() {
     
-  //   console.log('Client a modifier : ' + JSON.stringify(this.actualClient));
+     console.log('Client a modifier : ' + JSON.stringify(this.actualClient));
     
-  //   this.conseillerCLientService.updateClient(this.actualClient)
-  //     .subscribe(data => this.actualClient = data, error => this.alertService.error(error));
+     this.conseillerCLientService.updateClient(this.actualClient)
+       .subscribe(data => this.actualClient = data, error => this.alertService.error(error));
+   }
+
+
+   ngOnInit() { 
+     this.route.paramMap.subscribe(params => 
+       this.conseillerCLientService.getClient(params.get('id'))
+         .subscribe(data => this.actualClient = data, error => this.alertService.error(error))
+       );
+  }
+
+  // goBack(){
+  //   this.route.paramMap
   // }
-
-
-  // ngOnInit() {
-  //   this.route.paramMap.subscribe(params => 
-  //     this.conseillerCLientService.getClient(params.get('id'))
-  //       .subscribe(data => this.actualClient = data, error => this.alertService.error(error))
-  //     );
-
-      getMonClient(){
-        this.myService.getClient(9).subscribe((data => this.actualClient = data),
-          error => console.log('Error in the Service part'));
-          console.log('Client avec ID: ' + this.actualClient.id + 'Le nom du client est ' + this.actualClient.nom + '  et son prenom ' + this.actualClient.prenom);
-      }
-  
-      updateMonClient(cl:Client){
-        this.myService.updateClient(cl).subscribe((data => this.actualClient = data),
-          error => console.log('Error in the Service part'));
-          console.log('Client avec ID: ' + this.actualClient.id + 'Le nom du client est ' + this.actualClient.nom + '  et son prenom ' + this.actualClient.prenom);
-      }
-  
-  
-    ngOnInit() {
-      console.log('Bonjour');
-      this.getMonClient();
-    }
-  
-     onSubmit() {
-  console.log('Hello');
-  this.updateMonClient(this.actualClient);
-  // console.log('Client avec ID: ' + this.actualClient.id + 'Le nom du client est ' + this.actualClient.nom + '  et son prenom ' + this.actualClient.prenom);
-    }
-  
   
 }
 

@@ -22,7 +22,10 @@ import { JwtInterceptor } from './service/jwt.interceptor';
 import { ConseillerClientService } from './service/conseiller-client.service';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
+
+import { ListeConseillersComponent } from './liste-conseillers/liste-conseillers.component';
 import { DeleteClientComponent } from './delete-client/delete-client.component';
+
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import { DeleteClientComponent } from './delete-client/delete-client.component';
     ProfileComponent,
     HomeComponent,
     HeaderComponent,
+    ListeConseillersComponent,
     DeleteClientComponent
   ],
   imports: [
