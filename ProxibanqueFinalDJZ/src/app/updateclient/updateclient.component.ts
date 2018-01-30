@@ -18,22 +18,35 @@ export class UpdateclientComponent implements OnInit {
   constructor(
     private conseillerCLientService: ConseillerClientService,
     private route: ActivatedRoute,
-    private alertService: AlertService) { }
+    private alertService: AlertService) {
+    this.actualClient = new Client();
+  }
 
 
   onSubmit() {
-
-    console.log('Client a modifier : ' + JSON.stringify(this.actualClient));
-
-    this.conseillerCLientService.updateClient(this.actualClient)
-      .subscribe(data => this.actualClient = data, error => this.alertService.error(error));
+    if (null == this.actualClient.id) {
+      console.log('Client a ajouter : ' + JSON.stringify(this.actualClient));
+  
+      this.conseillerCLientService.addClient(this.actualClient)
+        .subscribe(data => this.actualClient = data, error => this.alertService.error(error));
+        
+    } else {
+      console.log('Client a modifier : ' + JSON.stringify(this.actualClient));
+  
+      this.conseillerCLientService.updateClient(this.actualClient)
+        .subscribe(data => this.actualClient = data, error => this.alertService.error(error));
+    }
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params =>
-      this.conseillerCLientService.getClient(params.get('id'))
-        .subscribe(data => this.actualClient = data, error => this.alertService.error(error))
-    );
+
+    this.route.paramMap.subscribe(params => {
+      let id = params.get('id');
+      if (null != id) {
+        this.conseillerCLientService.getClient(id)
+          .subscribe(data => this.actualClient = data, error => this.alertService.error(error))
+      }
+    });
   }
 
 }

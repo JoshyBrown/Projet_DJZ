@@ -135,7 +135,8 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<button type='submit' class="btn btn-primary">Mettre à jour</button>
+								<button *ngIf="null != actualClient.id" type='submit' class="btn btn-primary">Mettre à jour</button>
+								<button *ngIf="null == actualClient.id" type='submit' class="btn btn-primary">Ajouter</button>
 							</td>
 						</tr>
 					</table>

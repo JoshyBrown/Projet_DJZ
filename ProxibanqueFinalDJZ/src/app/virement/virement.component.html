@@ -2,48 +2,60 @@
 
 <form class="well" (ngSubmit)="onSubmit()" #virementForm='ngForm' novalidate>
   <table>
-
     <tr>
       <td>
-        <label for="debiteurselect">Selectionnez le client à débiter : </label>
-        <select class="form-control" name="debiteurselect" id="debiteurselect">
-          <option *ngFor="let client of clients" value='client.id'>{{client.nom}} {{client.prenom}} ({{client.refClient}})</option>
-        </select>
+        <div id="debiteur">
+          <table>
+            <tr>
+              <td>
+                <label for="debiteurselect">Selectionnez le client à débiter : </label>
+                <select class="form-control" name="debiteurselect" id="debiteurselect"
+                (ngModelChange)="selectDebiteur($event)" (ngModel)="clients">
+                  <option *ngFor="let client of clients" [ngValue]="client">{{client.nom}} {{client.prenom}} ({{client.refClient}})</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="debcomptselect">Selectionnez le compte à débiter : </label>
+                <select class="form-control" name="debcomptselect" id="debcomptselect">
+                  <option value="courant">Compte Courant</option>
+                  <option value="epargne">Compte Epargne</option>
+                </select>
+              </td>
+            </tr>
+          </table>
+        </div>
       </td>
-      <td>
-        <label for="debcomptselect">Selectionnez le compte à débiter : </label>
-        <select class="form-control" name="debcomptselect" id="debcomptselect">
-          <option value="courant">Compte Courant</option>
-          <option value="epargne">Compte Epargne</option>
-        </select>
-      </td>
-    </tr>
-
-
+    <td>
+    <div id="crediteur">
+      <table>
+        <tr>
+          <td>
+            <label for="crediteurselect">Selectionnez le client à crediter : </label>
+            <select class="form-control" name="crediteurselect" id="crediteurselect">
+              <option *ngFor="let client of allClients" value="client.id">{{client.nom}} {{client.prenom}} ({{client.refClient}})</option>
+            </select>
+          </td>
+          <td>
+            <label for="crdcomptselect">Selectionnez le compte à créditer : </label>
+            <select class="form-control" name="crdcomptselect" id="crdcomptselect">
+              <option value="courant">Compte Courant</option>
+              <option value="epargne">Compte Epargne</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </div>
+    </td></tr>
 
     <tr>
-      <td>
-        <label for="crediteurselect">Selectionnez le client à crediter : </label>
-        <select class="form-control" name="crediteurselect" id="crediteurselect">
-          <option *ngFor="let client of allClients" value="client.id">{{client.nom}} {{client.prenom}} ({{client.refClient}})</option>
-        </select>
-      </td>
-      <td>
-        <label for="crdcomptselect">Selectionnez le compte à créditer : </label>
-        <select class="form-control" name="crdcomptselect" id="crdcomptselect">
-          <option value="courant">Compte Courant</option>
-          <option value="epargne">Compte Epargne</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      <td colspan="2">
         <input type="text" name="montant" placeholder="Saisissez le montant" />
       </td>
     </tr>
     <tr>
-      <td>
-        <input type="reset" value="Annuller" class="btn" />
+      <td colspan="2">
         <input type="submit" value="Effectuer" class="btn btn-primary" />
       </td>
     </tr>

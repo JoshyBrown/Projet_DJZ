@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  */
 
 @JsonIgnoreProperties(value = {"password"}, allowSetters = true)
-@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="@class")
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="type")
 @Entity
 @Table(name = "employee")
 @Inheritance(strategy = InheritanceType.JOINED)
