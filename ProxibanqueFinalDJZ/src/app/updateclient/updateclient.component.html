@@ -134,8 +134,8 @@
 										</tr>
 									</tbody>
 								</table>
-								<a *ngIf="!actualClient.compteEpargne.etatActif" (click)="actualClient.compteCourant.etatActif=true">Activer</a>
-								</div>
+								<a class="btn" *ngIf="!actualClient.compteEpargne.etatActif" (click)="actualClient.compteEpargne.etatActif=true">Activer</a>
+
 							</td>
 						</tr>
 						<tr>

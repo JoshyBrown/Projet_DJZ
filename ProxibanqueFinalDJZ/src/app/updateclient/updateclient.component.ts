@@ -28,13 +28,15 @@ export class UpdateclientComponent implements OnInit {
       console.log('Client a ajouter : ' + JSON.stringify(this.actualClient));
   
       this.conseillerCLientService.addClient(this.actualClient)
-        .subscribe(data => this.actualClient = data, error => this.alertService.error(error));
+        .subscribe(data => { this.actualClient = data; this.alertService.success('Nouveau client ajoute');},
+                    error => this.alertService.error(error.message));
         
     } else {
       console.log('Client a modifier : ' + JSON.stringify(this.actualClient));
   
       this.conseillerCLientService.updateClient(this.actualClient)
-        .subscribe(data => this.actualClient = data, error => this.alertService.error(error));
+        .subscribe(data => { this.actualClient = data; this.alertService.success('Enregistrement reussi');},
+                    error => this.alertService.error(error.message));
     }
   }
 
@@ -44,7 +46,8 @@ export class UpdateclientComponent implements OnInit {
       let id = params.get('id');
       if (null != id) {
         this.conseillerCLientService.getClient(id)
-          .subscribe(data => this.actualClient = data, error => this.alertService.error(error))
+          .subscribe(data => this.actualClient = data, 
+                      error => this.alertService.error(error.message));
       }
     });
   }

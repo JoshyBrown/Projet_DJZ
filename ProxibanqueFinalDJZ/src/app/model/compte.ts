@@ -3,5 +3,5 @@ export class Compte {
     numCompte: string;
     solde: number;
     etatActif: boolean;
-    dateOuverture: string;
+    dateOuverture: Date;
 }

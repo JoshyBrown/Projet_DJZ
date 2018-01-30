@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.formation.proxibanque.service.Config;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -97,6 +99,8 @@ public class Client {
 	
 	public void setRefClient(String refClient) {
 		this.refClient = refClient;
+		this.compteCourant.setNumCompte(Config.PREFIX_COMPTE_COURANT + refClient);
+		this.compteEpargne.setNumCompte(Config.PREFIX_COMPTE_EPARGNE + refClient);
 	}
 
 	public Adresse getAdresse() {

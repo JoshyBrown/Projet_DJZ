@@ -22,7 +22,7 @@ export class ListeClientsComponent implements OnInit {
 
   getAllClients() {
     this.conseillerCLientService.getClientsByConseiller(JSON.parse(localStorage.getItem('currentUser')).id)
-      .subscribe(data => this.clients = data, error => this.alertService.error(error));
+      .subscribe(data => this.clients = data, error => this.alertService.error(error.message));
 
     return false;
   }
@@ -45,8 +45,8 @@ export class ListeClientsComponent implements OnInit {
 
     if (confirm("Veuillez supprimer le client " + client.nom + ' ' + client.prenom + " et tous ses comptes associes?")) {
       this.conseillerCLientService.deleteClient(client.id)
-        .subscribe(() => { this.alertService.success('Suppression de client reussi') },
-        error => this.alertService.error(error));
+        .subscribe(() => { this.getAllClients(); this.alertService.success('Suppression de client reussi'); },
+                  error => this.alertService.error(error.message));
     }
 
     return false;
