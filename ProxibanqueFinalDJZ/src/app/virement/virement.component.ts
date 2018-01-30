@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Client } from '../model/client';
+import { Virement } from '../model/virement';
 import { ConseillerClientService } from '../service/conseiller-client.service';
+import { VirementService } from '../service/virement.service';
 import { AlertService } from '../service/alert.service';
 
 @Component({
@@ -16,13 +18,11 @@ export class VirementComponent implements OnInit {
   clients: Client[];
   allClients: Client[];
 
-  debiteur: Client;
-  crediteur: Client;
-
-  montant: number;
+  virement: Virement;
 
   constructor(
     private conseillerCLientService: ConseillerClientService,
+    private virementService: VirementService,
     private alertService: AlertService) { }
   
   getClientsByConseiller() {
@@ -39,8 +39,17 @@ export class VirementComponent implements OnInit {
     return false;
   }
 
+  selectDebiteur(client: Client): void {
+    console.log(client);
+  }
+
+  onSubmit() {
+    this.virementService.doVirement(this.virement)
+      .subscribe(data => this.virement = data, error => this.alertService.error(error));
+  }
+
   ngOnInit() {
-    console.log('liste-client component marche');
+
     this.getAllClients();
     this.getClientsByConseiller();
   }
