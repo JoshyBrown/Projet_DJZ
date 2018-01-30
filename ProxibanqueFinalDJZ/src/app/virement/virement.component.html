@@ -22,9 +22,10 @@
 						<tr>
 							<td><label for="debcomptselect">Selectionnez le
 									compte à débiter : </label> <select class="form-control"
-								name="debcomptselect" id="debcomptselect">
-									<option value="courant">Compte Courant</option>
-									<option value="epargne">Compte Epargne</option>
+								name="debcomptselect" id="debcomptselect"
+								(ngModelChange)="selectDepart($event)" (ngModel)="compteDepart">
+									<option *ngFor="let compte of departs" [ngValue]="compte">{{compte.numCompte}}
+										{{compte.solde}}</option>
 							</select></td>
 						</tr>
 					</table>
@@ -36,18 +37,20 @@
 					<table>
 						<tr>
 							<td><label for="crediteurselect">Selectionnez le
-									client à crediter : </label> <select class="form-control"
-								name="crediteurselect" id="crediteurselect">
-									<option *ngFor="let client of allClients" value="client.id">{{client.nom}}
+									client à crediter : </label> 
+								<select class="form-control" name="crediteurselect" id="crediteurselect"
+								(ngModelChange)="selectCrediteur($event)" (ngModel)="clientCrediteur">
+									<option *ngFor="let client of allClients" [ngValue]="client">{{client.nom}}
 										{{client.prenom}} ({{client.refClient}})</option>
 							</select></td>
 						</tr>
 						<tr>
 							<td><label for="crdcomptselect">Selectionnez le
 									compte à créditer : </label> <select class="form-control"
-								name="crdcomptselect" id="crdcomptselect">
-									<option value="courant">Compte Courant</option>
-									<option value="epargne">Compte Epargne</option>
+								name="crdcomptselect" id="crdcomptselect" 
+								(ngModelChange)="selectCible($event)" (ngModel)="compteCible">
+									<option *ngFor="let compte of cibles" [ngValue]="compte">{{compte.numCompte}}
+										{{compte.solde}}</option>
 							</select></td>
 						</tr>
 					</table>
