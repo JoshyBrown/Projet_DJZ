@@ -27,14 +27,14 @@ export class VirementComponent implements OnInit {
   
   getClientsByConseiller() {
     this.conseillerCLientService.getClientsByConseiller(JSON.parse(localStorage.getItem('currentUser')).id)
-      .subscribe(data => this.clients = data, error => this.alertService.error(error));
+      .subscribe(data => this.clients = data, error => this.alertService.error(error.message));
 
     return false;
   }
   
   getAllClients() {
     this.conseillerCLientService.getClients()
-      .subscribe(data => this.allClients = data, error => this.alertService.error(error));
+      .subscribe(data => this.allClients = data, error => this.alertService.error(error.message));
 
     return false;
   }
@@ -45,7 +45,7 @@ export class VirementComponent implements OnInit {
 
   onSubmit() {
     this.virementService.doVirement(this.virement)
-      .subscribe(data => this.virement = data, error => this.alertService.error(error));
+      .subscribe(data => this.virement = data, error => this.alertService.error(error.message));
   }
 
   ngOnInit() {

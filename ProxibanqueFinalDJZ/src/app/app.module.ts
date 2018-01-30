@@ -26,8 +26,6 @@ import { ConseillerClientService } from './service/conseiller-client.service';
 import { GerantConseillerService } from './service/gerant-conseiller.service';
 import { VirementService } from './service/virement.service';
 
-import { DeleteClientComponent } from './delete-client/delete-client.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,8 +37,7 @@ import { DeleteClientComponent } from './delete-client/delete-client.component';
     ProfileComponent,
     HomeComponent,
     HeaderComponent,
-    ListeConseillersComponent,
-    DeleteClientComponent
+    ListeConseillersComponent
   ],
   imports: [
     BrowserModule, 

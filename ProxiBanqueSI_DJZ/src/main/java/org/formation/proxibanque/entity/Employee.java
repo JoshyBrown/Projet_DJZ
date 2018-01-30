@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
@@ -31,6 +32,10 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonIgnoreProperties(value = {"password"}, allowSetters = true)
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="type")
+@JsonSubTypes({
+      @JsonSubTypes.Type(value=Conseiller.class, name="Conseiller"),
+      @JsonSubTypes.Type(value=Gerant.class, name="Gerant")
+  }) 
 @Entity
 @Table(name = "employee")
 @Inheritance(strategy = InheritanceType.JOINED)
