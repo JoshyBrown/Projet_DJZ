@@ -1,3 +1,9 @@
+<div>
+  <a [routerLink]="['/gestion-client']">
+    <button type="button" class="btn btn-success">Retour</button>
+  </a>
+</div>
+
 <div class="col-md-6 col-md-offset-3">
   <h2>Profil du conseiller</h2>
   <form name="form" #profileForm="ngForm" novalidate>
@@ -21,6 +27,6 @@
       <button class="btn btn-primary" disabled>Mettre à jour</button>
       <a [routerLink]="['/home']" class="btn btn-link">Retour</a>
     </div>
-    
+
   </form>
 </div>

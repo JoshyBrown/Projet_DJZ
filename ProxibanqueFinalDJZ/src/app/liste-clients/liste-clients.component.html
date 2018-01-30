@@ -3,7 +3,7 @@
 </div>
 <br>
 
-<table class="table table-striped table-bordered table-hover">
+<table class="table table-bordered table-hover">
 	<thead class="thead-light">
 		<tr id="monRow">
 			<th>Référence du client</th>
@@ -15,27 +15,29 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="let client of clients">
+		<tr *ngFor="let client of clients" [ngClass]="{ 'table-danger': ( (client.compteCourant.solde < 0) || (client.compteEpargne.solde < 0) ), 
+			'table-success': ( (client.compteCourant.solde > 10000) || (client.compteEpargne.solde > 10000) ) }">
 			<td>{{client.refClient}}</td>
 			<td>{{client.nom}}</td>
 			<td>{{client.prenom}}</td>
 			<td>
 				<div *ngIf="client.compteCourant.etatActif">{{client.compteCourant.solde}} €</div>
 				<div *ngIf="!client.compteCourant.etatActif">
-					<a class="nav-link" [routerLink]="['/update-client', client.id]">Activer</a></div>
+					<a class="nav-link" [routerLink]="['/update-client', client.id]">Activer</a>
+				</div>
 			</td>
 			<td>
-				<div *ngIf="client.compteCourant.etatActif">{{client.compteEpargne.solde}} €</div>
-				<div *ngIf="!client.compteCourant.etatActif">
-					<a class="nav-link" [routerLink]="['/update-client', client.id]">Activer</a></div>
+				<div *ngIf="client.compteEpargne.etatActif">{{client.compteEpargne.solde}} €</div>
+				<div *ngIf="!client.compteEpargne.etatActif">
+					<a class="nav-link" [routerLink]="['/update-client', client.id]">Activer</a>
+				</div>
 			</td>
 			<td>
-				<button class="btn" (click)="goToDetails(client)">Détails</button>
+				<button class="btn btn-info" (click)="goToDetails(client)">Détails</button>
 			</td>
 			<td>
-				<button class="btn" (click)="deleteClient(client)">Supprimer</button>
+				<button class="btn btn-info" (click)="deleteClient(client)">Supprimer</button>
 			</td>
 		</tr>
 	</tbody>
 </table>
-

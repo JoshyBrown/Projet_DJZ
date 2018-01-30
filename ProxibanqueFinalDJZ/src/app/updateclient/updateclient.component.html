@@ -1,5 +1,8 @@
+<div>
+	<a [routerLink]="['/gestion-client']"><button type="button" class="btn btn-success">Retour</button></a>
+</div>
+
 <h3>Informations client :</h3>
-<!-- <a [routerLink]="[clients_list_url]">GO BACK</a> -->
 
 <form class="well" (ngSubmit)="onSubmit()" #updateForm='ngForm' ngNativeValidate>
 	<div class="container">
@@ -93,7 +96,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<a class="nav-link" *ngIf="!actualClient.compteCourant.etatActif" (click)="actualClient.compteCourant.etatActif=true">Activer</a>
+					<a class="btn btn-info" role="button" *ngIf="!actualClient.compteCourant.etatActif" (click)="actualClient.compteCourant.etatActif=true">Activer</a>
 				</div>
 			</div>
 
@@ -133,7 +136,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<a class="nav-link" *ngIf="!actualClient.compteEpargne.etatActif" (click)="actualClient.compteEpargne.etatActif=true">Activer</a>
+					<a class="btn btn-info" role="button" *ngIf="!actualClient.compteEpargne.etatActif" (click)="actualClient.compteEpargne.etatActif=true">Activer</a>
 				</div>
 			</div>
 			
