@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Client } from '../model/client';
+import { Virement } from '../model/virement';
 import { ConseillerClientService } from '../service/conseiller-client.service';
+import { VirementService } from '../service/virement.service';
 import { AlertService } from '../service/alert.service';
 
 @Component({
@@ -16,31 +18,38 @@ export class VirementComponent implements OnInit {
   clients: Client[];
   allClients: Client[];
 
-  debiteur: Client;
-  crediteur: Client;
-
-  montant: number;
+  virement: Virement;
 
   constructor(
     private conseillerCLientService: ConseillerClientService,
+    private virementService: VirementService,
     private alertService: AlertService) { }
   
   getClientsByConseiller() {
     this.conseillerCLientService.getClientsByConseiller(JSON.parse(localStorage.getItem('currentUser')).id)
-      .subscribe(data => this.clients = data, error => this.alertService.error(error));
+      .subscribe(data => this.clients = data, error => this.alertService.error(error.message));
 
     return false;
   }
   
   getAllClients() {
     this.conseillerCLientService.getClients()
-      .subscribe(data => this.allClients = data, error => this.alertService.error(error));
+      .subscribe(data => this.allClients = data, error => this.alertService.error(error.message));
 
     return false;
   }
 
+  selectDebiteur(client: Client): void {
+    console.log(client);
+  }
+
+  onSubmit() {
+    this.virementService.doVirement(this.virement)
+      .subscribe(data => this.virement = data, error => this.alertService.error(error.message));
+  }
+
   ngOnInit() {
-    console.log('liste-client component marche');
+
     this.getAllClients();
     this.getClientsByConseiller();
   }

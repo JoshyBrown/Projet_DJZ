@@ -1,8 +1,6 @@
-export class CompteCourant {
-    id: string;
-    numCompte: string;
-    solde: number;
-    etatActif: boolean;
-    dateOuverture: string;
+import { Compte } from "./compte";
+
+export class CompteCourant extends Compte {
+    private type = 'CompteCourant';
     decouvertAuthorise: number;
 }

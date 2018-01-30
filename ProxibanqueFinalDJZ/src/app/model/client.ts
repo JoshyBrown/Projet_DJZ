@@ -15,16 +15,11 @@ export class Client {
   password: string;
   conseiller: Conseiller;
 
-constructor(id: string, refClient: string, nom: string, prenom: string, compteCourant: CompteCourant, compteEpargne: CompteEpargne, adresse?: Adresse, login?: string, password?: string) {
-    this.id = id;
-    this.refClient = refClient;
-    this.nom = nom;
-    this.prenom = prenom;
-    this.compteCourant = compteCourant;
-    this.compteEpargne = compteEpargne;
-    this.adresse = adresse || null;
-    this.login = login || null;
-    this.password = login || null;
+  constructor() {
+    this.compteCourant = new CompteCourant();
+    this.compteEpargne = new CompteEpargne();
+    this.adresse = new Adresse();
+    this.conseiller = new Conseiller();
   }
 
 }

@@ -8,7 +8,6 @@ import org.formation.proxibanque.dao.DaoException;
 import org.formation.proxibanque.dao.IDaoEmployee;
 import org.formation.proxibanque.entity.Client;
 import org.formation.proxibanque.entity.Employee;
-import org.formation.proxibanque.service.ConseillerService;
 import org.formation.proxibanque.service.IConseillerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -29,7 +29,7 @@ export class ConseillerClientService {
   }
 
   deleteClient(id): Observable<any> {
-    return this.http.delete<Client>(this.client_url + '/' + id);
+    return this.http.delete(this.client_url + '/' + id);
   }
 
   getClientsByConseiller(id): Observable<Client[]> {

@@ -14,7 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
  * Entity Compte abstract (strategy SINGLE TABLE)
@@ -24,7 +25,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 
 
-@JsonIgnoreProperties(value = {"client"})
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="type")
+@JsonSubTypes({
+      @JsonSubTypes.Type(value=CompteCourant.class, name="CompteCourant"),
+      @JsonSubTypes.Type(value=CompteEpargne.class, name="CompteEpargne")
+  }) 
 @Entity
 @Table(name = "compte")
 @DiscriminatorColumn(name = "compte_type", discriminatorType = DiscriminatorType.STRING)
