@@ -14,43 +14,43 @@
 							<tr>
 								<th>Référence</th>
 								<td>
-									<input type="text" required [(ngModel)]='actualClient.refClient' name='ref' #ref='ngModel'/>
+									<input type="text" required [(ngModel)]='actualClient.refClient' name='ref' placeholder="CL000" #ref='ngModel'/>
 								</td>
 							</tr>
 							<tr>
 								<th>Nom du client</th>
 								<td>
-									<input type="text" required [(ngModel)]='actualClient.nom' name='nom' #nom='ngModel' pattern="[a-zA-Z ]*"/>
+									<input type="text" required [(ngModel)]='actualClient.nom' name='nom' placeholder="Nom" #nom='ngModel' pattern="[a-zA-Z ]*" />
 								</td>
 							</tr>
 							<tr>
 								<th>Prénom du client</th>
 								<td>
-									<input type="text" required [(ngModel)]='actualClient.prenom' name='prenom' #prenom='ngModel' />
+									<input type="text" required [(ngModel)]='actualClient.prenom' name='prenom' placeholder="Prénom" #prenom='ngModel' />
 								</td>
 							</tr>
 							<tr>
 								<th>Rue</th>
 								<td>
-									<input type="text" required [(ngModel)]='actualClient.adresse.rue' name='rue' #rue='ngModel' />
+									<input type="text" required [(ngModel)]='actualClient.adresse.rue' name='rue' placeholder="Rue" #rue='ngModel' />
 								</td>
 							</tr>
 							<tr>
 								<th>Code postal</th>
 								<td>
-									<input type="text" required [(ngModel)]='actualClient.adresse.codePostal' name='codePostal' #codePostal='ngModel' />
+									<input type="text" required [(ngModel)]='actualClient.adresse.codePostal' name='codePostal' placeholder="Code postal" #codePostal='ngModel' />
 								</td>
 							</tr>
 							<tr>
 								<th>Ville</th>
 								<td>
-									<input type="text" required [(ngModel)]='actualClient.adresse.ville' name='ville' #rue='ngModel' />
+									<input type="text" required [(ngModel)]='actualClient.adresse.ville' name='ville' placeholder="Ville" #rue='ngModel' />
 								</td>
 							</tr>
 							<tr>
 								<th>Tél</th>
 								<td>
-									<input type="text" required [(ngModel)]='actualClient.adresse.tel' name='tel' #tel='ngModel' />
+									<input type="text" required [(ngModel)]='actualClient.adresse.tel' name='tel' placeholder="0633190485" #tel='ngModel' />
 								</td>
 							</tr>
 						</tbody>
