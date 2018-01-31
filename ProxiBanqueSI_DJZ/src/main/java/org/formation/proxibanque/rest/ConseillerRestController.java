@@ -54,12 +54,15 @@ public class ConseillerRestController implements IConseillerRestController {
 	@PostMapping("/auth")
 	public ResponseEntity<Employee> login(@Valid @RequestBody Employee user) throws DaoException {
 		
-		LOGGER.info("Utilisateur : " + user.getLogin() + " essaye de logger");
+		LOGGER.info("Utilisateur : " + user.getLogin() + " essaye de logger " + user.getPassword() + "\n"
+				+ passwordEncoder.encode(user.getPassword()) ) ;
 		
 		Employee foundUser = daoEmployee.findEmployeeByLogin(user.getLogin());
 		if ( null != foundUser ) {
 			
-			if ( foundUser.getPassword().equals(passwordEncoder.encode(user.getPassword())) 
+			LOGGER.info("Utilisateur trouve : " + foundUser.getLogin() + " " + foundUser.getPassword());
+			
+			if ( passwordEncoder.matches( user.getPassword(), foundUser.getPassword() ) 
 					|| foundUser.getPassword().equals(user.getPassword()) ) {
 				foundUser.setToken("Fake token");
 				
