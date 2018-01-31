@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 
 
-@JsonIgnoreProperties(value = {"agence"})
+@JsonIgnoreProperties(value = {"agence", "conseillerList"})
 @Entity
 @Table(name = "gerant")
 public class Gerant extends Employee {

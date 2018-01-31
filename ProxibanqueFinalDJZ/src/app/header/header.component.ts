@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Conseiller } from '../model/conseiller';
 import { Observable } from 'rxjs/Observable';
 import { AuthenticationService } from '../service/authentication.service';
+import { Employee } from '../model/employee';
 
 @Component({
   selector: 'app-header',
@@ -9,14 +10,18 @@ import { AuthenticationService } from '../service/authentication.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  
+
   isLoggedIn$: Observable<boolean>;
-  currentUser: any;
+  currentUser = new Employee();
 
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn;
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.isLoggedIn$.subscribe(() => {
+      if (null != localStorage.getItem('currentUser')) {
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      }
+    });
   }
 }

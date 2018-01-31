@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { VirementComponent } from './virement/virement.component';
 import { UpdateclientComponent } from './updateclient/updateclient.component';
 import { ListeClientsComponent } from './liste-clients/liste-clients.component';
+import { ListeConseillersComponent } from './liste-conseillers/liste-conseillers.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
   { path: 'update-client/:id', component: UpdateclientComponent, canActivate: [AuthGuard] },
   { path: 'update-client', component: UpdateclientComponent, canActivate: [AuthGuard] },
   { path: 'gestion-client', component: ListeClientsComponent, canActivate: [AuthGuard] },
+  { path: 'gestion-conseiller', component: ListeConseillersComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: '**', redirectTo: '' }
 

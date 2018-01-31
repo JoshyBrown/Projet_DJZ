@@ -39,7 +39,7 @@ export class ListeClientsComponent implements OnInit {
     if (client.compteCourant.solde != 0 || client.compteEpargne.solde != 0) {
       if (confirm("Le compte courant ou épargne contient encore de l'argent. Veuillez d'abord faire le virement du client "
         + client.nom + ' ' + client.prenom + " vers un compte interne. Confirmer-vous votre redirection vers la page du virement?")) {
-          this.router.navigate(['/gestion-client'])
+          this.router.navigate(['/virement']);
       }
       return false;
     }
