@@ -30,8 +30,8 @@ export class AuthenticationService {
         return this.http.post<any>(this.auth_url, jsonBody)
             .map(user => {
                 if (user && user.token) {
-                    this.loggedIn.next(true);
                     localStorage.setItem('currentUser', JSON.stringify(user));
+                    this.loggedIn.next(true);
                 }
                 console.log(JSON.stringify(user));
                 return user;
