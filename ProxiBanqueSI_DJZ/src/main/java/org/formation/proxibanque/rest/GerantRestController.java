@@ -12,7 +12,6 @@ import org.formation.proxibanque.service.IGerantService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,59 +41,55 @@ public class GerantRestController implements IGerantRestController {
 	}
 
 	@Override
-	public ResponseEntity<Conseiller> chercherConseiller(@PathVariable(value = "id") Long idConseiller) {
+	public ResponseEntity<Conseiller> chercherConseiller(@PathVariable(value = "id") Long idConseiller) throws DaoException {
 		try {
 			Conseiller foundConseiller = gerantService.chercherConseiller(idConseiller);
 			if (null == foundConseiller)
-				return ResponseEntity.notFound().build();
+				throw new DaoException("Conseiller avec id : " + idConseiller + " non trouve");
 			
 			return ResponseEntity.ok(foundConseiller);
 
 		} catch (DaoException e) {
-			LOGGER.error("Exception : " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw e;
 		}
 	}
 
 	@Override
-	public ResponseEntity<Conseiller> ajouterConseiller(@Valid @RequestBody Conseiller conseiller) {
+	public ResponseEntity<Conseiller> ajouterConseiller(@Valid @RequestBody Conseiller conseiller) throws DaoException {
 		try {
 			gerantService.ajouterConseiller(conseiller);
 			
 			return ResponseEntity.ok(conseiller);
 			
 		} catch (DaoException e) {
-			LOGGER.error("Exception : " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw e;
 		}
 	}
 
 	@Override
-	public ResponseEntity<Conseiller> modifierConseiller(@Valid @RequestBody Conseiller conseiller) {
+	public ResponseEntity<Conseiller> modifierConseiller(@Valid @RequestBody Conseiller conseiller) throws DaoException {
 		try {
 			gerantService.modifierConseiller(conseiller);
 			
 			return ResponseEntity.ok(conseiller);
 		} catch (Exception e) {
-			LOGGER.error("Exception : " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw e;
 		}
 	}
 
 	@Override
-	public ResponseEntity<Conseiller> supprimerConseiller(@Valid @RequestBody Conseiller conseiller) {
+	public ResponseEntity<Conseiller> supprimerConseiller(@Valid @RequestBody Conseiller conseiller) throws DaoException {
 		try {
 			gerantService.supprimerConseiller(conseiller);
 			
 			return ResponseEntity.ok(conseiller);
 		} catch (DaoException e) {
-			LOGGER.error("Exception : " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw e;
 		}
 	}
 
 	@Override
-	public ResponseEntity<List<Conseiller>> listerConseillersDuGerant(@PathVariable(value = "id") Long idGerent) {
+	public ResponseEntity<List<Conseiller>> listerConseillersDuGerant(@PathVariable(value = "id") Long idGerent) throws DaoException {
 		try {
 			
 			List<Conseiller> cons = gerantService.listerConseillersDuGerant(idGerent); 
@@ -102,8 +97,7 @@ public class GerantRestController implements IGerantRestController {
 			
 			return ResponseEntity.ok(cons);
 		} catch (DaoException e) {
-			LOGGER.error("Exception : " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw e;
 		}    
 	}
 

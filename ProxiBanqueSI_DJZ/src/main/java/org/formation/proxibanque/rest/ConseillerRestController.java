@@ -12,7 +12,6 @@ import org.formation.proxibanque.service.IConseillerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,7 +48,7 @@ public class ConseillerRestController implements IConseillerRestController {
     private IDaoEmployee daoEmployee;
 	
 	@PostMapping("/auth")
-	public ResponseEntity<Employee> kogin(@Valid @RequestBody Employee user) {
+	public ResponseEntity<Employee> login(@Valid @RequestBody Employee user) throws DaoException {
 		
 		LOGGER.info("Utilisateur : " + user.getLogin() + " essaye de logger");
 		
@@ -61,20 +60,19 @@ public class ConseillerRestController implements IConseillerRestController {
 			
 			return ResponseEntity.ok(user);
 		} else {
-			LOGGER.error("Client avec login non trouve");
-			return ResponseEntity.notFound().build();
+			throw new DaoException("Client avec login non trouve");
 		}
 	}
 	
 	@Override
-	public ResponseEntity<Client> chercherClient(@PathVariable(value = "id") Long clientId) {
+	public ResponseEntity<Client> chercherClient(@PathVariable(value = "id") Long clientId) throws DaoException {
 		try {
 			LOGGER.info("Chercher client id : " + clientId);
 			
 			Client foundClient = conseillerService.chercherClient(clientId);
 			if (null == foundClient) {
 				LOGGER.error("Client avec id : " + clientId + " non trouve");
-				return ResponseEntity.notFound().build();
+				throw new DaoException("Client avec id : " + clientId + " non trouve");
 			}
 			
 			LOGGER.info("Client trouve : " + foundClient.getNom() + " " + foundClient.getPrenom());
@@ -82,8 +80,7 @@ public class ConseillerRestController implements IConseillerRestController {
 			return ResponseEntity.ok(foundClient);
 
 		} catch (DaoException e) {			
-			LOGGER.error("Exception : " + e.getMessage());			
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw e;
 		}
 	}
 
@@ -95,7 +92,7 @@ public class ConseillerRestController implements IConseillerRestController {
 	 * @throws DaoException
 	 *             DaoException
 	 */
-	public ResponseEntity<Client> ajouterClient(@Valid @RequestBody Client client) {
+	public ResponseEntity<Client> ajouterClient(@Valid @RequestBody Client client) throws DaoException {
 		try {
 			LOGGER.info("Client a ajoute : Id=" + client.getId() + " " + client.getNom() + " " + client.getPrenom());
 			
@@ -106,8 +103,7 @@ public class ConseillerRestController implements IConseillerRestController {
 			return ResponseEntity.ok(client);
 			
 		} catch (DaoException e) {
-			LOGGER.error("Exception : " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw e;
 		}
 	}
 
@@ -119,7 +115,7 @@ public class ConseillerRestController implements IConseillerRestController {
 	 * @throws DaoException
 	 *             DaoException
 	 */
-	public ResponseEntity<Client> modifierClient(@Valid @RequestBody Client client) {
+	public ResponseEntity<Client> modifierClient(@Valid @RequestBody Client client) throws DaoException {
 		try {
 			LOGGER.info("Client a modifie : Id=" + client.getId() + " " + client.getNom() + " " + client.getPrenom());
 						
@@ -129,8 +125,7 @@ public class ConseillerRestController implements IConseillerRestController {
 			
 			return ResponseEntity.ok(client);
 		} catch (Exception e) {
-			LOGGER.error("Exception : " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw e;
 		}
 	}
 
@@ -142,13 +137,13 @@ public class ConseillerRestController implements IConseillerRestController {
 	 * @throws DaoException
 	 *             DaoException
 	 */
-	public ResponseEntity<Client> supprimerClient(@PathVariable(value = "id") Long clientId) {
+	public ResponseEntity<Client> supprimerClient(@PathVariable(value = "id") Long clientId) throws DaoException {
 		try {
 			
 			Client foundClient = conseillerService.chercherClient(clientId);
 			if (null == foundClient) {
 				LOGGER.error("Client avec id : " + clientId + " non trouve");
-				return ResponseEntity.notFound().build();
+				throw new DaoException("Client avec id : " + clientId + " non trouve");
 			}
 			
 			conseillerService.supprimerClient(foundClient);
@@ -157,8 +152,7 @@ public class ConseillerRestController implements IConseillerRestController {
 			
 			return ResponseEntity.ok(foundClient);
 		} catch (DaoException e) {
-			LOGGER.error("Exception : " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw e;
 		}
 	}
 
@@ -169,7 +163,7 @@ public class ConseillerRestController implements IConseillerRestController {
 	 * @throws DaoException
 	 *             DaoException
 	 */
-	public ResponseEntity<List<Client>> listerTousClients() {
+	public ResponseEntity<List<Client>> listerTousClients() throws DaoException {
 		try {
 			List<Client> clis = conseillerService.listerTousClients();
 			
@@ -177,8 +171,7 @@ public class ConseillerRestController implements IConseillerRestController {
 			
 			return ResponseEntity.ok(clis);
 		} catch (DaoException e) {
-			LOGGER.error("Exception : " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw e;
 		}
 	}
 
@@ -189,7 +182,7 @@ public class ConseillerRestController implements IConseillerRestController {
 	 * @throws DaoException
 	 *             DaoException
 	 */
-	public ResponseEntity<List<Client>> listerClientsDeConseiller(@PathVariable(value = "id") Long idConseiller) {
+	public ResponseEntity<List<Client>> listerClientsDeConseiller(@PathVariable(value = "id") Long idConseiller) throws DaoException {
 		try {
 			List<Client> clis = conseillerService.listerClientsDeConseiller(idConseiller);
 			
@@ -197,8 +190,7 @@ public class ConseillerRestController implements IConseillerRestController {
 			
 			return ResponseEntity.ok(clis);
 		} catch (DaoException e) {
-			LOGGER.error("Exception : " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw e;
 		}
 	}
 }
