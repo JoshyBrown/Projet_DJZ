@@ -2,6 +2,7 @@ package org.formation.proxibanque.rest;
 
 import javax.validation.Valid;
 
+import org.formation.proxibanque.dao.DaoException;
 import org.formation.proxibanque.entity.Virement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,6 @@ public interface IVirementRestController {
 	
 	
 	@PostMapping("/virements")
-	public ResponseEntity<Virement> faireVirement(@Valid @RequestBody Virement virement	);	
+	public ResponseEntity<Virement> faireVirement(@Valid @RequestBody Virement virement	) throws DaoException;	
 	
 }

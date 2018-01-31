@@ -6,12 +6,16 @@ import { Client } from '../model/client';
 import { ConseillerClientService } from '../service/conseiller-client.service';
 import { AlertService } from '../service/alert.service';
 
+import * as CONST from '../constants';
+
 @Component({
   selector: 'app-liste-clients',
   templateUrl: './liste-clients.component.html',
   styleUrls: ['./liste-clients.component.css']
 })
 export class ListeClientsComponent implements OnInit {
+
+  private soldeFortune: number = CONST.CLIENT_RICH;
 
   clients: Array<Client>;
 

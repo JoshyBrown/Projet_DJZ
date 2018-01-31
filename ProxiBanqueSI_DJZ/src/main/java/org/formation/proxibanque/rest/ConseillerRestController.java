@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,18 +48,27 @@ public class ConseillerRestController implements IConseillerRestController {
 	@Autowired
     private IDaoEmployee daoEmployee;
 	
+	@Autowired
+    private PasswordEncoder passwordEncoder;
+	
 	@PostMapping("/auth")
 	public ResponseEntity<Employee> login(@Valid @RequestBody Employee user) throws DaoException {
 		
 		LOGGER.info("Utilisateur : " + user.getLogin() + " essaye de logger");
 		
-		user = daoEmployee.findEmployeeByLogin(user.getLogin());
-		if ( null != user ) {
-			user.setToken("Test token");
+		Employee foundUser = daoEmployee.findEmployeeByLogin(user.getLogin());
+		if ( null != foundUser ) {
 			
-			LOGGER.info("Logger reussi : " + user.getNom() + " " + user.getPrenom());
+			if ( foundUser.getPassword().equals(passwordEncoder.encode(user.getPassword())) 
+					|| foundUser.getPassword().equals(user.getPassword()) ) {
+				foundUser.setToken("Fake token");
+				
+				LOGGER.info("Logger reussi : " + foundUser.getNom() + " " + foundUser.getPrenom());
+				
+				return ResponseEntity.ok(foundUser);
+			} else
+				throw new DaoException("Mot de passe incorrect");		
 			
-			return ResponseEntity.ok(user);
 		} else {
 			throw new DaoException("Client avec login non trouve");
 		}

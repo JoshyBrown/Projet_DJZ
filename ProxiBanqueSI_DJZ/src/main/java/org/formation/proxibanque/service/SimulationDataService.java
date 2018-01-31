@@ -87,9 +87,30 @@ public class SimulationDataService {
 				new Adresse("Palaiseau", 91120, "IdF", "0123456007"));
 
 		Client enterprise1 = new Client("Darty", "EJ001883", "CL006", add);
+		enterprise1.getCompteCourant().setEtatActif(true);
+		enterprise1.getCompteCourant().setNumCompte("CC00001E");
+		enterprise1.getCompteCourant().setSolde(123000);
+		enterprise1.getCompteCourant().setDecouvertAuthorise(10000.00);
+		
 		Client enterprise2 = new Client("Carrefour", "EJ001223", "CL007", add);
+		enterprise2.getCompteCourant().setEtatActif(true);
+		enterprise2.getCompteCourant().setNumCompte("CC00002E");
+		enterprise2.getCompteCourant().setSolde(918787.12);
+		enterprise2.getCompteCourant().setDecouvertAuthorise(90000.00);
+		
+		
 		Client enterprise3 = new Client("Auchan", "E001234", "CL008", add);
+		enterprise3.getCompteCourant().setEtatActif(true);
+		enterprise3.getCompteCourant().setNumCompte("CC00003E");
+		enterprise3.getCompteCourant().setSolde(20082.23);
+		enterprise3.getCompteCourant().setDecouvertAuthorise(40000.00);
+		
 		Client enterprise4 = new Client("SFR", "EJ9179875", "CL009", add);
+		enterprise4.getCompteCourant().setEtatActif(true);
+		enterprise4.getCompteCourant().setNumCompte("CC00004E");
+		enterprise4.getCompteCourant().setSolde(-2900);
+		enterprise4.getCompteCourant().setDecouvertAuthorise(20000.00);
+		
 
 		Conseiller leConseiller1 = new Conseiller("David", "JOSHUA", "C001", add);
 		leConseiller1.setLogin("david");
@@ -121,6 +142,8 @@ public class SimulationDataService {
 		Agence leAgence = new Agence("0001", LocalDateTime.now().toString(), leGerant);
 
 		leGerant.addConseiller(leConseiller1);
+		leGerant.addConseiller(leConseiller2);
+		leGerant.addConseiller(leConseiller3);
 		leAgence.setGerant(leGerant);
 
 		daoAgence.save(leAgence);

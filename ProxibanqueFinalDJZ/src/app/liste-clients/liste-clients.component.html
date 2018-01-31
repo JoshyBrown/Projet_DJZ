@@ -16,7 +16,7 @@
 	</thead>
 	<tbody>
 		<tr *ngFor="let client of clients" [ngClass]="{ 'table-danger': ( (client.compteCourant.solde < 0) || (client.compteEpargne.solde < 0) ), 
-			'table-success': ( (client.compteCourant.solde > 10000) || (client.compteEpargne.solde > 10000) ) }">
+			'table-success': ( (client.compteCourant.solde > soldeFortune) || (client.compteEpargne.solde > soldeFortune) ) }">
 			<td>{{client.refClient}}</td>
 			<td>{{client.nom}}</td>
 			<td>{{client.prenom}}</td>

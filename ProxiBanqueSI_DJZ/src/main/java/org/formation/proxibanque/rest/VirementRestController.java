@@ -5,10 +5,7 @@ import javax.validation.Valid;
 import org.formation.proxibanque.dao.DaoException;
 import org.formation.proxibanque.entity.Virement;
 import org.formation.proxibanque.service.IVirementService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class VirementRestController implements IVirementRestController {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(VirementRestController.class);
 	
 	@Autowired
 	private IVirementService virementService;
@@ -38,17 +34,16 @@ public class VirementRestController implements IVirementRestController {
 
 
 	@Override
-	public ResponseEntity<Virement> faireVirement(@Valid @RequestBody Virement virement) {
+	public ResponseEntity<Virement> faireVirement(@Valid @RequestBody Virement virement) throws DaoException {
 		try {
 			if (virementService.faireVirement(virement)) {
 				return ResponseEntity.ok(virement);
 			}
 			
-			return  ResponseEntity.notFound().build();
+			throw new DaoException("Conditions de virement invalides : soit sur le meme compte, soit solde et decouvert insuffisants");
 			
 		} catch (DaoException e) {
-			LOGGER.error("Exception : " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw e;
 		}
 	}
 }
