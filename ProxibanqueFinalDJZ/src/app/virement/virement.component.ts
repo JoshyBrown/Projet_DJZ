@@ -89,20 +89,20 @@ export class VirementComponent implements OnInit {
       console.log('Effectuer un virement : \n' + JSON.stringify(this.virement));
       this.virementService.doVirement(this.virement)
         .subscribe(data => {this.virement = data; this.alertService.success('Virement réussi');},
-        error => this.alertService.error(error.message));
+        error => this.alertService.error(error.error));
     }
   }
 
   getClientsByConseiller() {
     this.conseillerCLientService.getClientsByConseiller(JSON.parse(localStorage.getItem('currentUser')).id)
-      .subscribe(data => this.clients = data, error => this.alertService.error(error.message));
+      .subscribe(data => this.clients = data, error => this.alertService.error(error.error));
 
     return false;
   }
 
   getAllClients() {
     this.conseillerCLientService.getClients()
-      .subscribe(data => this.allClients = data, error => this.alertService.error(error.message));
+      .subscribe(data => this.allClients = data, error => this.alertService.error(error.error));
 
     return false;
   }

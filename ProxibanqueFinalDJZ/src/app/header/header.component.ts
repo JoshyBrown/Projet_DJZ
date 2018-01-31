@@ -14,6 +14,8 @@ export class HeaderComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
   currentUser = new Employee();
 
+  isGerant = false;
+
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
@@ -21,6 +23,12 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn$.subscribe(() => {
       if (null != localStorage.getItem('currentUser')) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+        if (this.currentUser.roles[0].name == 'ROLE_GERANT') {
+          this.isGerant = true;
+        } else {
+          this.isGerant = false;
+        }
       }
     });
   }

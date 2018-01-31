@@ -37,14 +37,14 @@ export class UpdateclientComponent implements OnInit {
         
       this.conseillerCLientService.addClient(this.actualClient)
         .subscribe(data => { this.actualClient = data; this.alertService.success('Nouveau client ajouté');},
-                    error => this.alertService.error(error.message));
+                    error => this.alertService.error(error.error));
         
     } else {
       console.log('Client à modifier : ' + JSON.stringify(this.actualClient));
   
       this.conseillerCLientService.updateClient(this.actualClient)
         .subscribe(data => { this.actualClient = data; this.alertService.success('Enregistrement réussi');},
-                    error => this.alertService.error(error.message));
+                    error => this.alertService.error(error.error));
     }
   }
 
@@ -55,7 +55,7 @@ export class UpdateclientComponent implements OnInit {
       if (null != id) {
         this.conseillerCLientService.getClient(id)
           .subscribe(data => this.actualClient = data, 
-                      error => this.alertService.error(error.message));
+                      error => this.alertService.error(error.error));
       }
     });
   }

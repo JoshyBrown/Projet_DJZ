@@ -25,12 +25,12 @@ export class ListeConseillersComponent implements OnInit {
   loginAsConeiller(conseiller) {
     this.authenticationService.auth(conseiller.login, conseiller.password)
           .subscribe(data => this.router.navigate(['/home']),
-                    error => this.alertService.error(error.message));
+                    error => this.alertService.error(error.error));
   }
 
   getAllConseilers() {
     this.gerantConseillerService.getConseillersByGerant(JSON.parse(localStorage.getItem('currentUser')).id)
-      .subscribe(data => this.conseillers = data, error => this.alertService.error(error.message));
+      .subscribe(data => this.conseillers = data, error => this.alertService.error(error.error));
 
     return false;
   }
@@ -47,7 +47,7 @@ export class ListeConseillersComponent implements OnInit {
     if (confirm("Supprimer le conseiller " + conseiller.nom + " " + conseiller.prenom + " ?")) {
       this.gerantConseillerService.deleteConseiller(conseiller.id)
         .subscribe(() => { this.alertService.success('Suppression du conseiller réussi') },
-        error => this.alertService.error(error.message));
+        error => this.alertService.error(error.error));
     }
     return false;
   }
